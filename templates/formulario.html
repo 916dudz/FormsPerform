@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Avaliação</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Avaliação de Experiências</h1>
+        <form method="POST">
+            {% if perguntas %}
+            {% set historia_completa = perguntas[0][1] %}
+            <div class="pergunta">
+                <p><strong>História:</strong></p>
+                <p style="white-space: pre-wrap;">{{ historia_completa }}</p> <!-- APENAS A HISTÓRIA AQUI -->
+
+                <!-- PERGUNTA CONDICIONAL ÚNICA E CLARA -->
+                <p style="margin-top: 20px;"><strong>Você ou alguém que você conhece já passou por uma situação semelhante?</strong></p>
+                <div class="alternativas">
+                    <label>
+                        <input type="radio" name="resposta_condicional" value="sim" id="opt_sim" required> Sim
+                    </label><br>
+                    <label>
+                        <input type="radio" name="resposta_condicional" value="nao" id="opt_nao"> Não
+                    </label>
+                </div>
+            </div>
+
+            <div id="opcoes_frequencia" class="pergunta" style="display: none;">
+                <p><strong>Com que frequência isso acontece?</strong></p>
+                <div class="alternativas">
+                    <label><input type="radio" name="frequencia" value="a"> Quase Nunca <span class="descricao">(Aconteceu 1 ou 2 vezes, mas não é comum)</span></label><br>
+                    <label><input type="radio" name="frequencia" value="b"> Raramente <span class="descricao">(Acontece algumas vezes ao ano, mas não frequentemente)</span></label><br>
+                    <label><input type="radio" name="frequencia" value="c"> Ocasionalmente <span class="descricao">(Acontece algumas vezes por mês, é notável)</span></label><br>
+                    <label><input type="radio" name="frequencia" value="d"> Muito Frequentemente <span class="descricao">(Acontece várias vezes por semana)</span></label><br>
+                    <label><input type="radio" name="frequencia" value="e"> Quase Sempre <span class="descricao">(Acontece quase todos os dias ou várias vezes ao dia)</span></label>
+                </div>
+            </div>
+            {% endif %}
+
+            <button type="submit">Resultado</button>
+        </form>
+    </div>
+
+    <script>
+        const optSim = document.getElementById('opt_sim');
+        const optNao = document.getElementById('opt_nao');
+        const opcoesFrequenciaDiv = document.getElementById('opcoes_frequencia');
+        const radiosFrequencia = document.querySelectorAll('input[name="frequencia"]');
+
+        function toggleFrequenciaOptions() {
+            if (optSim.checked) {
+                opcoesFrequenciaDiv.style.display = 'block';
+                radiosFrequencia.forEach(radio => radio.setAttribute('required', 'required'));
+            } else {
+                opcoesFrequenciaDiv.style.display = 'none';
+                radiosFrequencia.forEach(radio => {
+                    radio.removeAttribute('required');
+                    radio.checked = false;
+                });
+            }
+        }
+
+        optSim.addEventListener('change', toggleFrequenciaOptions);
+        optNao.addEventListener('change', toggleFrequenciaOptions);
+
+        toggleFrequenciaOptions();
+    </script>
+</body>
+</html>

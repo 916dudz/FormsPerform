@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Grupo {{ grupo }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f7f7;
+            color: #333;
+            text-align: center;
+            padding: 40px;
+        }
+        .dashboard-container {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        h1 {
+            color: #2a4d69;
+            text-align: center;
+        }
+        h2 {
+            color: #4CAF50;
+            margin-top: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #2a4d69;
+            color: white;
+        }
+        .summary-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .summary-info p {
+            margin: 5px 0;
+        }
+        .back-button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 10px 20px;
+            background-color: #2a4d69;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            width: fit-content;
+        }
+        .back-button:hover {
+            background-color: #1c354d;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Dashboard do Grupo {{ grupo }}</h1>
+
+        <div class="summary-info">
+            <p>Total de usuários neste grupo: <strong>{{ total_usuarios }}</strong></p>
+            <p>Média de pontuação do grupo: <strong>{{ media_pontuacao }}</strong></p>
+        </div>
+
+        <h2>Usuários e Pontuações</h2>
+        {% if usuarios %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Usuário</th>
+                    <th>Pontuação Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario[0] }}</td>
+                    <td>{{ usuario[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Nenhum usuário classificado neste grupo ainda.</p>
+        {% endif %}
+
+        <a href="{{ url_for('formulario') }}" class="back-button">Voltar ao Formulário</a>
+    </div>
+</body>
+</html>
