@@ -39,7 +39,7 @@ body {
     line-height: 1.6;
 
     /* Novo fundo para o body - mais limpo e sutil */
-    background: rgb(255, 230, 230);
+    background: rgb(220, 190, 240);
 }
 
 .container, .result-container {
@@ -50,7 +50,7 @@ body {
     width: 100%;
     margin: 30px;
     box-sizing: border-box;
-    background: rgba(139, 99, 156, 0.6);
+    background: rgba(200, 200, 156, 0.7);
     position: relative;
     overflow: hidden;
 }
@@ -128,7 +128,7 @@ label {
 
 
 .pergunta {
-    background-color: rgb(255, 240, 240);
+    background-color: rgb(230, 230, 200);
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 25px;
@@ -246,7 +246,7 @@ button:hover {
 }
 
 .message-box {
-    background-color: rgb(255, 240, 240);
+    background-color: rgb(250, 240, 240);
     border-left: 6px solid var(--primary-color);
     margin-top: 30px;
     padding: 20px;
