@@ -3,19 +3,19 @@
 
 :root {
     /* Cores principais - Paleta um pouco mais rica */
-    --primary-color: #800080; 
-    --primary-dark: #350035; 
-    --primary-light: #800080; 
-    --accent-color: #ff4081; 
-    --secondary-color: #6C757D; 
-    --background-light: #F0F2F5; 
-    --background-dark: #E1E4E8; 
-    --text-color: #212121; 
-    --light-text-color: #ffffff;
-    --border-color: #D2D6DC; 
-    --focus-border: #800080; 
-    --success-color: #4CAF50;
-    --error-color: #F44336; 
+    --primary-color: #800080; /* Medium purple, the core gender-neutral shade. */
+    --primary-dark: #4B004B; /* A darker, muted purple for depth (e.g., hover states or darker UI elements). */
+    --primary-light: #B266B2; /* A lighter purple for highlights or subtle backgrounds, maintaining neutrality. */
+    --accent-color: #DAA520; /* A soft goldenrod yellow, providing a warm, neutral contrast that pairs well with purple without being overly bold. */
+    --secondary-color: #6A5ACD; /* This muted purple-blue shade maintains neutrality, harmonizes with the primary purple, and provides a distinct yet cohesive contrast for secondary elements like buttons or icons. */
+    --background-light: #2E2E2E; /* A very light gray for clean, neutral backgrounds in light themes. */
+    --background-dark: #F5F5F5; /* A dark charcoal gray for dark theme backgrounds, neutral and professional. */
+    --text-color: #333333; /* A dark gray (near black) for readable, neutral text on light backgrounds. */
+    --light-text-color: #E0E0E0; /* A light gray for text on dark backgrounds, ensuring readability without stark white. */
+    --border-color: #808080; /* A medium gray for neutral borders, versatile for light and dark themes. */
+    --focus-border: #9932CC; /* A slightly more vibrant purple (dark orchid) for focus states, accessible and tied to the primary color. */
+    --success-color: #228B22; /* A forest green for success states, neutral and professional without being overly bright. */
+    --error-color: #A52A2A; /* A muted brown-red for error states, clear but not overly aggressive. */
 
     /* Sombras */
     --shadow-light: rgba(0, 0, 0, 0.08);
@@ -39,7 +39,7 @@ body {
     line-height: 1.6;
 
     /* Novo fundo para o body - mais limpo e sutil */
-    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); /* Um gradiente azul suave */
+    background: rgb(255, 230, 230);
 }
 
 .container, .result-container {
@@ -50,7 +50,7 @@ body {
     width: 100%;
     margin: 30px;
     box-sizing: border-box;
-    background: linear-gradient(145deg, var(--white-color) 90%, var(--background-dark) 100%);
+    background: rgba(139, 99, 156, 0.6);
     position: relative;
     overflow: hidden;
 }
@@ -128,7 +128,7 @@ label {
 
 
 .pergunta {
-    background-color: var(--background-dark);
+    background-color: rgb(255, 240, 240);
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 25px;
@@ -246,7 +246,7 @@ button:hover {
 }
 
 .message-box {
-    background-color: #E6F7FF;
+    background-color: rgb(255, 240, 240);
     border-left: 6px solid var(--primary-color);
     margin-top: 30px;
     padding: 20px;
