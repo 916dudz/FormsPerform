@@ -3,9 +3,9 @@
 
 :root {
     /* Cores principais - Paleta um pouco mais rica */
-    --primary-color: #3f51b5; /* Azul índigo */
-    --primary-dark: #303f9f; /* Azul índigo mais escuro para hover */
-    --primary-light: #7986cb; /* Azul índigo mais claro */
+    --primary-color: #800080; /* Azul índigo */
+    --primary-dark: #350035; /* Azul índigo mais escuro para hover */
+    --primary-light: #800080; /* Azul índigo mais claro */
     --accent-color: #ff4081; /* Rosa vibrante para acentos */
     --secondary-color: #6C757D; /* Cinza para textos secundários */
     --background-light: #F0F2F5; /* Fundo mais suave, cinza claro */
@@ -13,7 +13,7 @@
     --text-color: #212121; /* Texto principal mais escuro */
     --light-text-color: #ffffff; /* Texto claro (para botões) */
     --border-color: #D2D6DC; /* Cor da borda suave */
-    --focus-border: #8092ff; /* Cor da borda no foco */
+    --focus-border: #800080; /* Cor da borda no foco */
     --success-color: #4CAF50; /* Verde para sucesso */
     --error-color: #F44336; /* Vermelho para erro */
 
@@ -22,7 +22,7 @@
     --shadow-medium: rgba(0, 0, 0, 0.15);
     --shadow-hover: rgba(0, 0, 0, 0.25);
     --shadow-button: rgba(0, 0, 0, 0.25);
-    --focus-shadow: rgba(63, 81, 181, 0.35);
+    --focus-shadow: rgba(206, 2, 224, 0.35);
 }
 
 body {
@@ -40,13 +40,10 @@ body {
 
     /* Novo fundo para o body - mais limpo e sutil */
     background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); /* Um gradiente azul suave */
-    /* background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png'); */
-    /* background-repeat: repeat; */
-    /* background-size: auto; */
 }
 
 .container, .result-container {
-    background-color: var(--white-color);
+    background-color: var(--white-color); /* Note: --white-color is not defined, should be #ffffff or similar */
     border-radius: 12px;
     box-shadow: 0 8px 20px var(--shadow-medium);
     padding: 40px;
@@ -67,7 +64,7 @@ body {
 }
 
 h1, h2 {
-    color: var(--primary-color);
+    color: #800080;
     text-align: center;
     margin-bottom: 30px;
     font-weight: 700;
@@ -78,7 +75,7 @@ h1, h2 {
 h1 {
     font-size: 2.5em;
     padding-bottom: 10px;
-    border-bottom: 2px solid var(--primary-light);
+    border-bottom: 2px solid #800080;
     margin-bottom: 35px;
 }
 
@@ -92,32 +89,32 @@ label {
     margin-top: 25px;
     margin-bottom: 8px;
     font-weight: 600;
-    color: var(--secondary-color);
+    color: #800080;
     font-size: 0.95em;
 }
 
-/* Estilo para o wrapper de input com ícone */
 .input-wrapper {
     position: relative;
-    margin-bottom: 15px; /* Substitui o margin-bottom do input */
+    margin-bottom: 0;
 }
 
 .input-wrapper input {
-    width: calc(100% - 22px - 35px); /* Ajusta para padding, borda e ícone */
-    padding: 12px 12px 12px 45px; /* Adiciona padding à esquerda para o ícone */
-    border: 1px solid var(--border-color);
+    width: calc(100% - 22px - 35px);
+    padding: 12px 12px 12px 45px;
+    border: 1px solid #800080;
     border-radius: 8px;
     font-size: 1em;
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     box-sizing: border-box;
-    background-color: var(--background-light);
+    background-color: #800080; /* This line makes the input background purple */
+    margin-bottom: 15px; /* Manter a margem inferior para separar do próximo label */
 }
 
 .input-wrapper input:focus {
     border-color: var(--focus-border);
     box-shadow: 0 0 0 4px var(--focus-shadow);
     outline: none;
-    background-color: var(--white-color);
+    background-color: var(--white-color); /* This will be an issue if --white-color is not defined */
 }
 
 .input-wrapper .icon {
@@ -177,6 +174,7 @@ label {
     background-color: rgba(var(--primary-color), 0.05);
 }
 
+/* Base radio styles */
 input[type="radio"] {
     margin-right: 10px;
     appearance: none;
@@ -199,7 +197,7 @@ input[type="radio"]:checked::after {
     content: '';
     width: 10px;
     height: 10px;
-    background: var(--white-color);
+    background: var(--white-color); /* Make sure --white-color is defined or use #ffffff */
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -342,12 +340,48 @@ button:hover {
     font-style: italic;
 }
 
-/* Garante que o input-wrapper não adicione margem dupla */
-.input-wrapper {
-    margin-bottom: 0; /* Remover margem padrão do input-wrapper */
+/* --- ESTILOS PARA AS CORES (ADICIONEI AQUI) --- */
+.color-option input[type="radio"] {
+    display: none; /* Esconde o radio button */
+}
+.color-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ccc; /* Borda padrão */
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.2s ease-in-out;
+}
+.color-circle.red { background-color: red; }
+.color-circle.orange { background-color: orange; }
+.color-circle.yellow { background-color: yellow; }
+
+.color-option input[type="radio"]:checked + .color-circle {
+    border-color: #007bff; /* Borda ao selecionar */
+    box-shadow: 0 0 0 3px #007bff; /* Efeito de seleção */
+    transform: scale(1.1); /* Um pequeno zoom */
+}
+.color-option {
+    display: inline-block;
+    margin: 10px;
 }
 
-/* Ajusta o input dentro do wrapper para ter sua própria margem */
-.input-wrapper input {
-    margin-bottom: 15px; /* Manter a margem inferior para separar do próximo label */
+/* Visibilidade das seções (já tinha, só para garantir que estão aqui) */
+#opcoes_frequencia, #pergunta_cor {
+    display: none; /* Escondidos por padrão */
+}
+
+#opt_sim:checked ~ form #opcoes_frequencia {
+    display: block;
+}
+#opt_sim:checked ~ form #pergunta_cor {
+     display: block;
+}
+#opt_nao:checked ~ form #opcoes_frequencia {
+    display: none;
+}
+#opt_nao:checked ~ form #pergunta_cor {
+    display: none;
 }
