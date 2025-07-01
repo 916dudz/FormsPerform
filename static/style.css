@@ -3,19 +3,19 @@
 
 :root {
     /* Cores principais - Paleta um pouco mais rica */
-    --primary-color: #800080; /* Azul índigo */
-    --primary-dark: #350035; /* Azul índigo mais escuro para hover */
-    --primary-light: #800080; /* Azul índigo mais claro */
-    --accent-color: #ff4081; /* Rosa vibrante para acentos */
-    --secondary-color: #6C757D; /* Cinza para textos secundários */
-    --background-light: #F0F2F5; /* Fundo mais suave, cinza claro */
-    --background-dark: #E1E4E8; /* Fundo ligeiramente mais escuro para cards */
-    --text-color: #212121; /* Texto principal mais escuro */
-    --light-text-color: #ffffff; /* Texto claro (para botões) */
-    --border-color: #D2D6DC; /* Cor da borda suave */
-    --focus-border: #800080; /* Cor da borda no foco */
-    --success-color: #4CAF50; /* Verde para sucesso */
-    --error-color: #F44336; /* Vermelho para erro */
+    --primary-color: #800080; 
+    --primary-dark: #350035; 
+    --primary-light: #800080; 
+    --accent-color: #ff4081; 
+    --secondary-color: #6C757D; 
+    --background-light: #F0F2F5; 
+    --background-dark: #E1E4E8; 
+    --text-color: #212121; 
+    --light-text-color: #ffffff;
+    --border-color: #D2D6DC; 
+    --focus-border: #800080; 
+    --success-color: #4CAF50;
+    --error-color: #F44336; 
 
     /* Sombras */
     --shadow-light: rgba(0, 0, 0, 0.08);
