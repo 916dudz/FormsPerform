@@ -10,14 +10,14 @@
     <div class="container">
         <h1>Avaliação de Experiências</h1>
         <form method="POST">
-            {% if perguntas %}
-            {% set historia_completa = perguntas[0][1] %}
             <div class="pergunta">
-                <p><strong>História:</strong></p>
-                <p style="white-space: pre-wrap;">{{ historia_completa }}</p> <!-- APENAS A HISTÓRIA AQUI -->
+                <p><strong>Às vezes, quando algo não acontece do jeito que esperávamos, é como se uma onda tomasse conta da gente. O coração acelera, a respiração muda, e as palavras parecem fugir ou sair mais fortes do que gostaríamos. Em casa, com pessoas próximas, esse turbilhão pode ser ainda mais intenso, porque existe afeto, confiança e, muitas vezes, expectativas que nem sempre são ditas em voz alta. Esse é o caso da Clara, a personagem principal da história abaixo.</strong></p>
+                <p style="margin-top: 15px;"><strong>“Quando tudo vem de uma vez”</strong></p>
+                <p>Personagem principal: Clara, 28 anos, mora com os pais e o irmão mais novo.</p>
+                <p>Ambiente: casa, fim de semana.</p>
+                <p style="white-space: pre-wrap; margin-top: 10px;">Clara estava animada para o fim de semana. Havia planejado passar a tarde ouvindo música e organizando sua coleção de livros, uma atividade que a ajudava a relaxar. Mas, logo após o café da manhã, sua mãe avisou que a tia viria visitar e queria usar o quarto de Clara para descansar. Assim que ouviu aquilo, algo dentro dela se embaralhou. O peito apertou, os olhos arderam, e a voz saiu alta, quase gritando: “Sempre mudam tudo! Nunca me avisam antes!” Sem pensar muito, ela bateu a porta do quarto. Em seguida, se encolheu na cama, sentindo-se dominada por uma mistura de raiva, culpa e tristeza. Ela fica na cama até a visita chegar.</p>
 
-                <!-- PERGUNTA CONDICIONAL ÚNICA E CLARA -->
-                <p style="margin-top: 20px;"><strong>Você ou alguém que você conhece já passou por uma situação semelhante?</strong></p>
+                <p style="margin-top: 20px;"><strong>Alguma vez você já se sentiu profundamente incomodado com uma regra, rotina ou jeito de fazer as coisas que parecia não fazer sentido pra você? E que tenta argumentar, explicar ou propor uma mudança? Esse tipo de situação pode acontecer também em casa, na faculdade, em grupos de convivência, ou até mesmo em um relacionamento romântico.</strong></p>
                 <div class="alternativas">
                     <label>
                         <input type="radio" name="resposta_condicional" value="sim" id="opt_sim" required> Sim
@@ -27,7 +27,6 @@
                     </label>
                 </div>
             </div>
-
             <div id="opcoes_frequencia" class="pergunta" style="display: none;">
                 <p><strong>Com que frequência isso acontece?</strong></p>
                 <div class="alternativas">
@@ -38,8 +37,23 @@
                     <label><input type="radio" name="frequencia" value="e"> Quase Sempre <span class="descricao">(Acontece quase todos os dias ou várias vezes ao dia)</span></label>
                 </div>
             </div>
-            {% endif %}
-
+            <div id="pergunta_cor" class="pergunta">
+                <p><strong>De forma intuitiva, ou seja, sem racionalizar muito, escolha a cor que melhor representa a intensidade com que suas emoções se manifestam quando esse tipo de situação acontece.</strong></p>
+                <div class="alternativas color-options-container">
+                    <div class="color-option">
+                        <input type="radio" name="intensidade_emocional" value="vermelho" id="cor_vermelho" required>
+                        <label for="cor_vermelho" class="color-circle red" title="Vermelho"></label>
+                    </div>
+                    <div class="color-option">
+                        <input type="radio" name="intensidade_emocional" value="laranja" id="cor_laranja" required>
+                        <label for="cor_laranja" class="color-circle orange" title="Laranja"></label>
+                    </div>
+                    <div class="color-option">
+                        <input type="radio" name="intensidade_emocional" value="amarelo" id="cor_amarelo" required>
+                        <label for="cor_amarelo" class="color-circle yellow" title="Amarelo"></label>
+                    </div>
+                </div>
+            </div>
             <button type="submit">Resultado</button>
         </form>
     </div>
@@ -58,7 +72,7 @@
                 opcoesFrequenciaDiv.style.display = 'none';
                 radiosFrequencia.forEach(radio => {
                     radio.removeAttribute('required');
-                    radio.checked = false;
+                    radio.checked = false; // Desmarca a opção se o "Não" for selecionado
                 });
             }
         }
@@ -66,6 +80,7 @@
         optSim.addEventListener('change', toggleFrequenciaOptions);
         optNao.addEventListener('change', toggleFrequenciaOptions);
 
+        // Chama a função uma vez ao carregar a página para definir o estado inicial
         toggleFrequenciaOptions();
     </script>
 </body>
