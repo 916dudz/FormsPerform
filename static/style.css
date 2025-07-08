@@ -1,21 +1,19 @@
-/* Importar uma fonte do Google Fonts para um toque moderno */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 :root {
-    /* Cores principais - Paleta um pouco mais rica */
-    --primary-color: #800080; 
-    --primary-dark: #350035; 
-    --primary-light: #800080; 
-    --accent-color: #ff4081; 
-    --secondary-color: #6C757D; 
-    --background-light: #F0F2F5; 
-    --background-dark: #E1E4E8; 
-    --text-color: #212121; 
-    --light-text-color: #ffffff;
-    --border-color: #D2D6DC; 
-    --focus-border: #800080; 
-    --success-color: #4CAF50;
-    --error-color: #F44336; 
+    --primary-color: #800080; /* Medium purple, the core gender-neutral shade. */
+    --primary-dark: #4b004b; /* A darker, muted purple for depth (e.g., hover states or darker UI elements). */
+    --primary-light: #b266b2; /* A lighter purple for highlights or subtle backgrounds, maintaining neutrality. */
+    --accent-color: #daa520; /* A soft goldenrod yellow, providing a warm, neutral contrast that pairs well with purple without being overly bold. */
+    --secondary-color: #6a5acd; /* This muted purple-blue shade maintains neutrality, harmonizes with the primary purple, and provides a distinct yet cohesive contrast for secondary elements like buttons or icons. */
+    --background-light: #2e2e2e; /* A very light gray for clean, neutral backgrounds in light themes. */
+    --background-dark: #f5f5f5; /* A dark charcoal gray for dark theme backgrounds, neutral and professional. */
+    --text-color: #333333; /* A dark gray (near black) for readable, neutral text on light backgrounds. */
+    --light-text-color: #e0e0e0; /* A light gray for text on dark backgrounds, ensuring readability without stark white. */
+    --border-color: #808080; /* A medium gray for neutral borders, versatile for light and dark themes. */
+    --focus-border: #9932cc; /* A slightly more vibrant purple (dark orchid) for focus states, accessible and tied to the primary color. */
+    --success-color: #228b22; /* A forest green for success states, neutral and professional without being overly bright. */
+    --error-color: #a52a2a; /* A muted brown-red for error states, clear but not overly aggressive. */
 
     /* Sombras */
     --shadow-light: rgba(0, 0, 0, 0.08);
@@ -26,8 +24,9 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     background-color: var(--background-light);
+    overflow-x: hidden;
     color: var(--text-color);
     margin: 0;
     padding: 20px;
@@ -39,37 +38,56 @@ body {
     line-height: 1.6;
 
     /* Novo fundo para o body - mais limpo e sutil */
-    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); /* Um gradiente azul suave */
+    background: rgb(220, 190, 255);
 }
 
-.container, .result-container {
-    background-color: var(--white-color); /* Note: --white-color is not defined, should be #ffffff or similar */
+.container {
+    background-color: var(--white-color);
     border-radius: 12px;
     box-shadow: 0 8px 20px var(--shadow-medium);
     padding: 40px;
     width: 100%;
     margin: 30px;
     box-sizing: border-box;
-    background: linear-gradient(145deg, var(--white-color) 90%, var(--background-dark) 100%);
+    background: rgba(200, 200, 156, 0.7);
     position: relative;
     overflow: hidden;
 }
 
 .container {
+    width: 100%;
     max-width: 700px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding: 1rem; /* inner padding */
+}
+
+.result-container {
+    background-color: var(--white-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    padding: 40px;
+    width: 100%;
+    margin: 30px;
+    box-sizing: border-box;
+    background: white;
+    position: relative;
+    overflow: hidden;
 }
 
 .result-container {
     max-width: 600px;
 }
 
-h1, h2 {
+h1,
+h2 {
     color: #800080;
     text-align: center;
     margin-bottom: 30px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -77,6 +95,11 @@ h1 {
     padding-bottom: 10px;
     border-bottom: 2px solid #800080;
     margin-bottom: 35px;
+    position: sticky;
+    top: 0;
+    background: var(--white-color);
+    z-index: 100;
+    padding-top: 15px;
 }
 
 h2 {
@@ -104,17 +127,20 @@ label {
     border: 1px solid #800080;
     border-radius: 8px;
     font-size: 1em;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
     box-sizing: border-box;
-    background-color: #800080; /* This line makes the input background purple */
-    margin-bottom: 15px; /* Manter a margem inferior para separar do próximo label */
+    background-color: #800080; /* purple input background  */
+    margin-bottom: 15px;
 }
 
 .input-wrapper input:focus {
     border-color: var(--focus-border);
     box-shadow: 0 0 0 4px var(--focus-shadow);
     outline: none;
-    background-color: var(--white-color); /* This will be an issue if --white-color is not defined */
+    background-color: var(--white-color);
 }
 
 .input-wrapper .icon {
@@ -126,15 +152,16 @@ label {
     font-size: 1.1em;
 }
 
-
 .pergunta {
-    background-color: var(--background-dark);
+    background-color: rgb(230, 230, 200);
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 25px;
     box-shadow: 0 4px 12px var(--shadow-light);
     border: 1px solid var(--border-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     position: relative;
     overflow: hidden;
     border-left: 5px solid var(--primary-light);
@@ -154,6 +181,14 @@ label {
 
 .alternativas {
     margin-top: 15px;
+    gap: 20px;
+}
+
+.alternativas_sim_nao {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 70px;
 }
 
 .alternativas label {
@@ -163,15 +198,15 @@ label {
     display: flex;
     align-items: center;
     color: var(--text-color);
-    transition: color 0.2s ease, transform 0.1s ease;
+    transition:
+        color 0.2s ease,
+        transform 0.1s ease;
     padding: 5px;
-    border-radius: 5px;
 }
 
 .alternativas label:hover {
     color: var(--primary-dark);
     transform: translateX(8px);
-    background-color: rgba(var(--primary-color), 0.05);
 }
 
 /* Base radio styles */
@@ -185,7 +220,9 @@ input[type="radio"] {
     position: relative;
     cursor: pointer;
     flex-shrink: 0;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 input[type="radio"]:checked {
@@ -194,10 +231,10 @@ input[type="radio"]:checked {
 }
 
 input[type="radio"]:checked::after {
-    content: '';
+    content: "";
     width: 10px;
     height: 10px;
-    background: var(--white-color); /* Make sure --white-color is defined or use #ffffff */
+    background: var(--white-color);
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -217,9 +254,16 @@ button {
     display: block;
     width: 100%;
     margin-top: 40px;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
     box-shadow: 0 4px 10px var(--shadow-button);
-    background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-color) 0%,
+        var(--primary-light) 100%
+    );
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
@@ -228,10 +272,14 @@ button:hover {
     background-color: var(--primary-dark);
     transform: translateY(-5px);
     box-shadow: 0 8px 20px var(--shadow-hover);
-    background-image: linear-gradient(45deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-dark) 0%,
+        var(--primary-color) 100%
+    );
 }
 
-/* Estilos para resultado.html */
+/* resultado.html */
 
 .result-container p {
     font-size: 1.15em;
@@ -246,7 +294,7 @@ button:hover {
 }
 
 .message-box {
-    background-color: #E6F7FF;
+    background-color: rgb(250, 240, 240);
     border-left: 6px solid var(--primary-color);
     margin-top: 30px;
     padding: 20px;
@@ -269,9 +317,16 @@ button:hover {
     border-radius: 8px;
     font-size: 1.05em;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
     box-shadow: 0 4px 10px var(--shadow-button);
-    background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-color) 0%,
+        var(--primary-light) 100%
+    );
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
@@ -280,12 +335,17 @@ button:hover {
     background-color: var(--primary-dark);
     transform: translateY(-5px);
     box-shadow: 0 8px 20px var(--shadow-hover);
-    background-image: linear-gradient(45deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-dark) 0%,
+        var(--primary-color) 100%
+    );
 }
 
-/* Responsividade Básica */
+/* Basic Responsivity */
 @media (max-width: 768px) {
-    .container, .result-container {
+    .container,
+    .result-container {
         padding: 25px;
         margin: 15px;
     }
@@ -309,7 +369,8 @@ button:hover {
     body {
         padding: 10px;
     }
-    .container, .result-container {
+    .container,
+    .result-container {
         padding: 15px;
         margin: 10px;
     }
@@ -331,57 +392,128 @@ button:hover {
     .message-box p {
         font-size: 1em;
     }
-} 
-/* Estilo para a descrição das alternativas de frequência */
+}
+
 .alternativas .descricao {
     font-size: 0.85em;
     color: var(--secondary-color);
-    margin-left: 5px; /* Espaço entre a opção e a descrição */
+    margin-left: 5px;
     font-style: italic;
 }
 
-/* --- ESTILOS PARA AS CORES (ADICIONEI AQUI) --- */
 .color-option input[type="radio"] {
-    display: none; /* Esconde o radio button */
+    display: none;
 }
 .color-circle {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid #ccc; /* Borda padrão */
+    border: 2px solid #ccc;
     display: inline-block;
     cursor: pointer;
     margin: 5px;
     transition: all 0.2s ease-in-out;
 }
-.color-circle.red { background-color: red; }
-.color-circle.orange { background-color: orange; }
-.color-circle.yellow { background-color: yellow; }
+.color-circle.red {
+    background-color: red;
+}
+.color-circle.orange {
+    background-color: orange;
+}
+.color-circle.yellow {
+    background-color: yellow;
+}
 
 .color-option input[type="radio"]:checked + .color-circle {
-    border-color: #007bff; /* Borda ao selecionar */
-    box-shadow: 0 0 0 3px #007bff; /* Efeito de seleção */
-    transform: scale(1.1); /* Um pequeno zoom */
+    border-color: purple;
+    box-shadow: 0 0 0 3px purple;
+    transform: scale(1.1);
 }
 .color-option {
     display: inline-block;
     margin: 10px;
 }
 
-/* Visibilidade das seções (já tinha, só para garantir que estão aqui) */
-#opcoes_frequencia, #pergunta_cor {
-    display: none; /* Escondidos por padrão */
+#opcoes_frequencia,
+#pergunta_cor {
+    display: none;
 }
 
 #opt_sim:checked ~ form #opcoes_frequencia {
     display: block;
 }
 #opt_sim:checked ~ form #pergunta_cor {
-     display: block;
+    display: block;
 }
 #opt_nao:checked ~ form #opcoes_frequencia {
     display: none;
 }
 #opt_nao:checked ~ form #pergunta_cor {
     display: none;
+}
+.pergunta-imagem {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.copos-opcoes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+}
+
+.copo-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    flex: 1;
+}
+
+.copo-option input[type="radio"] {
+    display: none;
+}
+
+.copo-option img {
+    max-width: 80px;
+    height: auto;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.copo-option span {
+    margin-top: 8px;
+    font-size: 0.95em;
+}
+
+.copo-option input[type="radio"]:checked + img {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 3px var(--primary-color);
+    border-radius: 8px;
+}
+
+.form-navigation {
+    position: static;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto 0;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.form-navigation button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
