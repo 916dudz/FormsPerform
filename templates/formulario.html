@@ -1,87 +1,2300 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Formulário de Avaliação</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Avaliação de Experiências</h1>
-        <form method="POST">
-            <div class="pergunta">
-                <p><strong>Às vezes, quando algo não acontece do jeito que esperávamos, é como se uma onda tomasse conta da gente. O coração acelera, a respiração muda, e as palavras parecem fugir ou sair mais fortes do que gostaríamos. Em casa, com pessoas próximas, esse turbilhão pode ser ainda mais intenso, porque existe afeto, confiança e, muitas vezes, expectativas que nem sempre são ditas em voz alta. Esse é o caso da Clara, a personagem principal da história abaixo.</strong></p>
-                <p style="margin-top: 15px;"><strong>“Quando tudo vem de uma vez”</strong></p>
-                <p>Personagem principal: Clara, 28 anos, mora com os pais e o irmão mais novo.</p>
-                <p>Ambiente: casa, fim de semana.</p>
-                <p style="white-space: pre-wrap; margin-top: 10px;">Clara estava animada para o fim de semana. Havia planejado passar a tarde ouvindo música e organizando sua coleção de livros, uma atividade que a ajudava a relaxar. Mas, logo após o café da manhã, sua mãe avisou que a tia viria visitar e queria usar o quarto de Clara para descansar. Assim que ouviu aquilo, algo dentro dela se embaralhou. O peito apertou, os olhos arderam, e a voz saiu alta, quase gritando: “Sempre mudam tudo! Nunca me avisam antes!” Sem pensar muito, ela bateu a porta do quarto. Em seguida, se encolheu na cama, sentindo-se dominada por uma mistura de raiva, culpa e tristeza. Ela fica na cama até a visita chegar.</p>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Formulário de Avaliação</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Avaliação de Experiências</h1>
+            <form id="multiStepForm" action="/resultado" method="POST">
+                <div class="form-step" data-step="1">
+                    <div class="pergunta">
+                        <p>
+                            <strong
+                                >Às vezes, quando algo não acontece do jeito que
+                                esperávamos, é como se uma onda tomasse conta da
+                                gente. O coração acelera, a respiração muda, e
+                                as palavras parecem fugir ou sair mais fortes do
+                                que gostaríamos. Em casa, com pessoas próximas,
+                                esse turbilhão pode ser ainda mais intenso,
+                                porque existe afeto, confiança e, muitas vezes,
+                                expectativas que nem sempre são ditas em voz
+                                alta. Esse é o caso da Clara, a personagem
+                                principal da história abaixo.</strong
+                            >
+                        </p>
+                        <p style="margin-top: 15px">
+                            <strong>“Quando tudo vem de uma vez”</strong>
+                        </p>
+                        <p>
+                            Personagem principal: Clara, 28 anos, mora com os
+                            pais e o irmão mais novo.
+                        </p>
+                        <p>Ambiente: casa, fim de semana.</p>
+                        <p style="margin-top: 10px">
+                            Clara estava animada para o fim de semana. Havia
+                            planejado passar a tarde ouvindo música e
+                            organizando sua coleção de livros, uma atividade que
+                            a ajudava a relaxar. Mas, logo após o café da manhã,
+                            sua mãe avisou que a tia viria visitar e queria usar
+                            o quarto de Clara para descansar. Assim que ouviu
+                            aquilo, algo dentro dela se embaralhou. O peito
+                            apertou, os olhos arderam, e a voz saiu alta, quase
+                            gritando: “Sempre mudam tudo! Nunca me avisam
+                            antes!” Sem pensar muito, ela bateu a porta do
+                            quarto. Em seguida, se encolheu na cama, sentindo-se
+                            dominada por uma mistura de raiva, culpa e tristeza.
+                            Ela fica na cama até a visita chegar.
+                        </p>
 
-                <p style="margin-top: 20px;"><strong>Alguma vez você já se sentiu profundamente incomodado com uma regra, rotina ou jeito de fazer as coisas que parecia não fazer sentido pra você? E que tenta argumentar, explicar ou propor uma mudança? Esse tipo de situação pode acontecer também em casa, na faculdade, em grupos de convivência, ou até mesmo em um relacionamento romântico.</strong></p>
-                <div class="alternativas">
-                    <label>
-                        <input type="radio" name="resposta_condicional" value="sim" id="opt_sim" required> Sim
-                    </label><br>
-                    <label>
-                        <input type="radio" name="resposta_condicional" value="nao" id="opt_nao"> Não
-                    </label>
-                </div>
-            </div>
-            <div id="opcoes_frequencia" class="pergunta" style="display: none;">
-                <p><strong>Com que frequência isso acontece?</strong></p>
-                <div class="alternativas">
-                    <label><input type="radio" name="frequencia" value="a"> Quase Nunca <span class="descricao">(Aconteceu 1 ou 2 vezes, mas não é comum)</span></label><br>
-                    <label><input type="radio" name="frequencia" value="b"> Raramente <span class="descricao">(Acontece algumas vezes ao ano, mas não frequentemente)</span></label><br>
-                    <label><input type="radio" name="frequencia" value="c"> Ocasionalmente <span class="descricao">(Acontece algumas vezes por mês, é notável)</span></label><br>
-                    <label><input type="radio" name="frequencia" value="d"> Muito Frequentemente <span class="descricao">(Acontece várias vezes por semana)</span></label><br>
-                    <label><input type="radio" name="frequencia" value="e"> Quase Sempre <span class="descricao">(Acontece quase todos os dias ou várias vezes ao dia)</span></label>
-                </div>
-            </div>
-            <div id="pergunta_cor" class="pergunta">
-                <p><strong>De forma intuitiva, ou seja, sem racionalizar muito, escolha a cor que melhor representa a intensidade com que suas emoções se manifestam quando esse tipo de situação acontece.</strong></p>
-                <div class="alternativas color-options-container">
-                    <div class="color-option">
-                        <input type="radio" name="intensidade_emocional" value="vermelho" id="cor_vermelho" required>
-                        <label for="cor_vermelho" class="color-circle red" title="Vermelho"></label>
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Alguma vez você já se sentiu profundamente
+                                incomodado com uma regra, rotina ou jeito de
+                                fazer as coisas que parecia não fazer sentido
+                                pra você? E que tenta argumentar, explicar ou
+                                propor uma mudança? Esse tipo de situação pode
+                                acontecer também em casa, na faculdade, em
+                                grupos de convivência, ou até mesmo em um
+                                relacionamento romântico.</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_1"
+                                    value="sim"
+                                    id="opt_sim_1"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_1"
+                                    value="nao"
+                                    id="opt_nao_1"
+                                />
+                                Não
+                            </label>
+                        </div>
                     </div>
-                    <div class="color-option">
-                        <input type="radio" name="intensidade_emocional" value="laranja" id="cor_laranja" required>
-                        <label for="cor_laranja" class="color-circle orange" title="Laranja"></label>
-                    </div>
-                    <div class="color-option">
-                        <input type="radio" name="intensidade_emocional" value="amarelo" id="cor_amarelo" required>
-                        <label for="cor_amarelo" class="color-circle yellow" title="Amarelo"></label>
-                    </div>
-                </div>
-            </div>
-            <button type="submit">Resultado</button>
-        </form>
-    </div>
 
-    <script>
-        const optSim = document.getElementById('opt_sim');
-        const optNao = document.getElementById('opt_nao');
-        const opcoesFrequenciaDiv = document.getElementById('opcoes_frequencia');
-        const radiosFrequencia = document.querySelectorAll('input[name="frequencia"]');
+                    <div
+                        id="opcoes_frequencia_1"
+                        class="pergunta"
+                        style="display: none"
+                    >
+                        <p>
+                            <strong>Com que frequência isso acontece?</strong>
+                        </p>
+                        <div class="alternativas">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_1"
+                                    value="a"
+                                    id="frequencia_1_a"
+                                />
+                                Quase Nunca
+                                <span class="descricao"
+                                    >(Aconteceu 1 ou 2 vezes, mas não é
+                                    comum)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_1"
+                                    value="b"
+                                    id="frequencia_1_b"
+                                />
+                                Raramente
+                                <span class="descricao"
+                                    >(Acontece algumas vezes ao ano, mas não
+                                    frequentemente)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_1"
+                                    value="c"
+                                    id="frequencia_1_c"
+                                />
+                                Ocasionalmente
+                                <span class="descricao"
+                                    >(Acontece algumas vezes por mês, é
+                                    notável)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_1"
+                                    value="d"
+                                    id="frequencia_1_d"
+                                />
+                                Muito Frequentemente
+                                <span class="descricao"
+                                    >(Acontece várias vezes por semana)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_1"
+                                    value="e"
+                                    id="frequencia_1_e"
+                                />
+                                Quase Sempre
+                                <span class="descricao"
+                                    >(Acontece quase todos os dias ou várias
+                                    vezes ao dia)</span
+                                ></label
+                            >
+                        </div>
+                    </div>
 
-        function toggleFrequenciaOptions() {
-            if (optSim.checked) {
-                opcoesFrequenciaDiv.style.display = 'block';
-                radiosFrequencia.forEach(radio => radio.setAttribute('required', 'required'));
-            } else {
-                opcoesFrequenciaDiv.style.display = 'none';
-                radiosFrequencia.forEach(radio => {
-                    radio.removeAttribute('required');
-                    radio.checked = false; // Desmarca a opção se o "Não" for selecionado
+                    <div
+                        id="pergunta_cor_1"
+                        class="pergunta"
+                        style="display: none"
+                    >
+                        <p>
+                            <strong
+                                >De forma intuitiva, ou seja, sem racionalizar
+                                muito, escolha a cor que melhor representa a
+                                intensidade com que suas emoções se manifestam
+                                quando esse tipo de situação acontece.</strong
+                            >
+                        </p>
+                        <div class="alternativas color-options-container">
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_1"
+                                    value="vermelho"
+                                    id="cor_vermelho_1"
+                                />
+                                <label
+                                    for="cor_vermelho_1"
+                                    class="color-circle red"
+                                    title="Vermelho"
+                                ></label>
+                            </div>
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_1"
+                                    value="laranja"
+                                    id="cor_laranja_1"
+                                />
+                                <label
+                                    for="cor_laranja_1"
+                                    class="color-circle orange"
+                                    title="Laranja"
+                                ></label>
+                            </div>
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_1"
+                                    value="amarelo"
+                                    id="cor_amarelo_1"
+                                />
+                                <label
+                                    for="cor_amarelo_1"
+                                    class="color-circle yellow"
+                                    title="Amarelo"
+                                ></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="2" style="display: none">
+                    <div class="pergunta">
+                        <p>
+                            <strong
+                                >Algumas normas ou regras, aparentemente sem
+                                sentido, no ambientes de trabalho parecem
+                                existir apenas porque sempre foram assim. Quando
+                                algo não faz sentido, o impulso de apontar,
+                                discutir ou tentar mudar pode ser inevitável
+                                mesmo que os outros prefiram simplesmente
+                                aceitar. Para algumas pessoas, lidar com regras
+                                assim pode ser confuso ou até gerar um
+                                desconforto profundo. Esse é o caso do Vinícius,
+                                o personagem da história abaixo</strong
+                            >
+                        </p>
+                        <p style="margin-top: 15px">
+                            <strong>“Não é só porque sempre foi assim”</strong>
+                        </p>
+                        <p>
+                            Personagem principal: Vinícius, 34 anos, analista de
+                            dados.
+                        </p>
+                        <p>Ambiente: trabalho</p>
+                        <p style="margin-top: 10px">
+                            Vinícius gosta do que faz em seu trabalho, tem um
+                            bom desempenho e cumpre os prazos com eficiência,
+                            mas uma coisa o incomoda: toda semana precisa
+                            preencher um formulário da área de recursos humanos
+                            descrevendo o que já entregou na semana, mesmo que
+                            tudo já esteja no sistema principal da empresa. Para
+                            ele, parece uma regra sem sentido, então, numa
+                            reunião, o gestor lembra que é sexta-feira e que
+                            todos devem preencher o formulário antes de irem
+                            embora. Então, Vinícius diz que é uma perda de
+                            tempo, que ninguém lê aquilo, e que seria melhor
+                            parar com essa exigência. O gestor responde que é
+                            uma política da empresa. Vinícius insiste. Sente que
+                            precisa explicar, argumentar que essa regra não faz
+                            sentido. O gestor encerra a reunião, dizendo que as
+                            coisas são assim e não vão mudar. Vinícios vai
+                            embora frustrado e fica pensando no assunto por
+                            muitas horas.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Alguma vez você já se sentiu profundamente
+                                incomodado com uma regra, rotina ou jeito de
+                                fazer as coisas que parecia não fazer sentido
+                                pra você? E que tenta argumentar, explicar ou
+                                propor uma mudança? Esse tipo de situação pode
+                                acontecer também em casa, na faculdade, em
+                                grupos de convivência, ou até mesmo em um
+                                relacionamento romântico.</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_2"
+                                    value="sim"
+                                    id="opt_sim_2"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_2"
+                                    value="nao"
+                                    id="opt_nao_2"
+                                />
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div
+                        id="opcoes_frequencia_2"
+                        class="pergunta"
+                        style="display: none"
+                    >
+                        <p>
+                            <strong>Com que frequência isso acontece?</strong>
+                        </p>
+                        <div class="alternativas">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_2"
+                                    value="a"
+                                    id="frequencia_2_a"
+                                />
+                                Quase Nunca
+                                <span class="descricao"
+                                    >(Aconteceu 1 ou 2 vezes, mas não é
+                                    comum)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_2"
+                                    value="b"
+                                    id="frequencia_2_b"
+                                />
+                                Raramente
+                                <span class="descricao"
+                                    >(Acontece algumas vezes ao ano, mas não
+                                    frequentemente)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_2"
+                                    value="c"
+                                    id="frequencia_2_c"
+                                />
+                                Ocasionalmente
+                                <span class="descricao"
+                                    >(Acontece algumas vezes por mês, é
+                                    notável)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_2"
+                                    value="d"
+                                    id="frequencia_2_d"
+                                />
+                                Muito Frequentemente
+                                <span class="descricao"
+                                    >(Acontece várias vezes por semana)</span
+                                ></label
+                            ><br />
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="frequencia_2"
+                                    value="e"
+                                    id="frequencia_2_e"
+                                />
+                                Quase Sempre
+                                <span class="descricao"
+                                    >(Acontece quase todos os dias ou várias
+                                    vezes ao dia)</span
+                                ></label
+                            >
+                        </div>
+                    </div>
+
+                    <div
+                        id="pergunta_cor_2"
+                        class="pergunta"
+                        style="display: none"
+                    >
+                        <p>
+                            <strong
+                                >De forma intuitiva, ou seja, sem racionalizar
+                                muito, escolha a cor que melhor representa a
+                                intensidade com que suas emoções se manifestam
+                                quando esse tipo de situação acontece.</strong
+                            >
+                        </p>
+                        <div class="alternativas color-options-container">
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_2"
+                                    value="vermelho"
+                                    id="cor_vermelho_2"
+                                />
+                                <label
+                                    for="cor_vermelho_2"
+                                    class="color-circle red"
+                                    title="Vermelho"
+                                ></label>
+                            </div>
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_2"
+                                    value="laranja"
+                                    id="cor_laranja_2"
+                                />
+                                <label
+                                    for="cor_laranja_2"
+                                    class="color-circle orange"
+                                    title="Laranja"
+                                ></label>
+                            </div>
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_2"
+                                    value="amarelo"
+                                    id="cor_amarelo_2"
+                                />
+                                <label
+                                    for="cor_amarelo_2"
+                                    class="color-circle yellow"
+                                    title="Amarelo"
+                                ></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="3" style="display: none">
+                    <div class="pergunta">
+                        <img
+                            src="{{ url_for('static', filename='static/image/Imagem1.png') }}"
+                            alt="Ilustração da história do Felipe"
+                            class="pergunta-imagem"
+                        />
+
+                        <p style="margin-top: 15px">
+                            <strong>“Não tem a menor graça”</strong>
+                        </p>
+                        <p>
+                            Personagem principal: Felipe, 21 anos, cursa
+                            engenharia
+                        </p>
+                        <p>Ambiente: sala de aula e pátio da faculdade</p>
+                        <p style="margin-top: 10px">
+                            Felipe costuma ficar em silêncio nas rodas de
+                            conversa e quando tem algo específico ou importante
+                            a dizer, fala com propriedade, dizendo tudo que
+                            sabe, descrevendo detalhes importantes que ninguém
+                            sabia. Durante uma pausa entre aulas, um colega
+                            imita o jeito que Felipe se senta, brincando: “É o
+                            nosso Sheldon brasileiro!”. Outro ri e comenta:
+                            “Quando fala sempre dá uma palestra para a gente”.
+                            Felipe se vira rápido e responde alto: “Se vocês têm
+                            um problema comigo, falem direto. Ficar fazendo
+                            graça não é engraçado.” Os colegas se entreolham,
+                            sem reação. Um deles tenta dizer que era só zoeira,
+                            “brincadeira entre amigos”. Mas Felipe já está
+                            andando para longe, com o corpo tenso e a cabeça
+                            cheia.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Você já se sentiu incomodado com uma
+                                brincadeira ou piada sobre você, mesmo quando os
+                                outros disseram que era só "zoeira"? E acabou
+                                respondendo de forma mais direta ou grosseira,
+                                como se precisasse se defender de algo? Pode ter
+                                acontecido na faculdade, mas também em outros
+                                lugares — como no trabalho, em reuniões
+                                familiares ou até mesmo entre amigos</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_3"
+                                    value="sim"
+                                    id="opt_sim_3"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_3"
+                                    value="nao"
+                                    id="opt_nao_3"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="opcoes_frequencia_3"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >Com que frequência isso acontece?</strong
+                                >
+                            </p>
+                            <div class="alternativas">
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_3"
+                                        value="a"
+                                        id="frequencia_3_a"
+                                    />
+                                    Quase Nunca
+                                    <span class="descricao"
+                                        >(Aconteceu 1 ou 2 vezes, mas não é
+                                        comum)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_3"
+                                        value="b"
+                                        id="frequencia_3_b"
+                                    />
+                                    Raramente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes ao ano, mas não
+                                        frequentemente)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_3"
+                                        value="c"
+                                        id="frequencia_3_c"
+                                    />
+                                    Ocasionalmente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes por mês, é
+                                        notável)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_3"
+                                        value="d"
+                                        id="frequencia_3_d"
+                                    />
+                                    Muito Frequentemente
+                                    <span class="descricao"
+                                        >(Acontece várias vezes por
+                                        semana)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_3"
+                                        value="e"
+                                        id="frequencia_3_e"
+                                    />
+                                    Quase Sempre
+                                    <span class="descricao"
+                                        >(Acontece quase todos os dias ou várias
+                                        vezes ao dia)</span
+                                    ></label
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_3"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_3"
+                                        value="vermelho"
+                                        id="cor_vermelho_3"
+                                    />
+                                    <label
+                                        for="cor_vermelho_3"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_3"
+                                        value="laranja"
+                                        id="cor_laranja_3"
+                                    />
+                                    <label
+                                        for="cor_laranja_3"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_3"
+                                        value="amarelo"
+                                        id="cor_amarelo_3"
+                                    />
+                                    <label
+                                        for="cor_amarelo_3"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="4" style="display: none">
+                    <div class="pergunta">
+                        <img
+                            src="{{ url_for('static', filename='static/image/Imagem2.png') }}"
+                            alt="Ilustração da história do Felipe"
+                            class="pergunta-imagem"
+                        />
+
+                        <p style="margin-top: 15px">
+                            <strong>“Só estou tentando ajudar”</strong>
+                        </p>
+                        <p>
+                            Personagem principal: Rafael, 39 anos, namora há
+                            alguns meses
+                        </p>
+                        <p>Ambiente: Casa da namorada</p>
+                        <p style="margin-top: 10px">
+                            Rafael visita a namorada com frequência. Gosta do
+                            clima da casa, do tempo juntos e de conversar sobre
+                            tudo. Quando chega na casa dela, logo coloca sua
+                            mochila em cima do sofá, seu computador em cima da
+                            mesa de jantar e seus pertences pessoais de higiene
+                            como perfume e gel de cabelo em cima da pia do
+                            banheiro. Quando nota que algo poderia ser feito de
+                            forma mais prática, sempre comenta, e muitas vezes
+                            sempre faz os mesmos comentários toda vez que vai na
+                            casa da namorada. Por exemplo, toda semana ele diz:
+                            “Se você organizar os livros por tema, fica mais
+                            fácil achar depois.” e toda semana a namorada
+                            responde: “Eu não ligo muito para isso, está bom do
+                            jeito que está “. Rafael insiste e mesmo após a
+                            namorada mudar de assunto, durante algum tempo, ele
+                            fica pensando que os livros poderiam ser organizados
+                            por tema.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Você já tentou ajudar alguém sugerindo com
+                                frequência, um jeito diferente de fazer as
+                                coisas ou soluções para problemas, mesmo que não
+                                tenham te perguntado ou pedido? Ou já ocupou um
+                                espaço de alguém de forma espontânea, sem pensar
+                                muito ou perguntar onde seria melhor colocar
+                                suas coisas ? Isso pode ter acontecido em
+                                situações que envolvam parceiros românticos, mas
+                                também em outras relações próximas, como com
+                                amigos, familiares ou colegas de estudo ou
+                                trabalho.</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_4"
+                                    value="sim"
+                                    id="opt_sim_4"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_4"
+                                    value="nao"
+                                    id="opt_nao_4"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="opcoes_frequencia_4"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >Com que frequência isso acontece?</strong
+                                >
+                            </p>
+                            <div class="alternativas">
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_4"
+                                        value="a"
+                                        id="frequencia_4_a"
+                                    />
+                                    Quase Nunca
+                                    <span class="descricao"
+                                        >(Aconteceu 1 ou 2 vezes, mas não é
+                                        comum)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_4"
+                                        value="b"
+                                        id="frequencia_4_b"
+                                    />
+                                    Raramente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes ao ano, mas não
+                                        frequentemente)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_4"
+                                        value="c"
+                                        id="frequencia_4_c"
+                                    />
+                                    Ocasionalmente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes por mês, é
+                                        notável)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_4"
+                                        value="d"
+                                        id="frequencia_4_d"
+                                    />
+                                    Muito Frequentemente
+                                    <span class="descricao"
+                                        >(Acontece várias vezes por
+                                        semana)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_4"
+                                        value="e"
+                                        id="frequencia_4_e"
+                                    />
+                                    Quase Sempre
+                                    <span class="descricao"
+                                        >(Acontece quase todos os dias ou várias
+                                        vezes ao dia)</span
+                                    ></label
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_4"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_4"
+                                        value="vermelho"
+                                        id="cor_vermelho_4"
+                                    />
+                                    <label
+                                        for="cor_vermelho_4"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_4"
+                                        value="laranja"
+                                        id="cor_laranja_4"
+                                    />
+                                    <label
+                                        for="cor_laranja_4"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_4"
+                                        value="amarelo"
+                                        id="cor_amarelo_4"
+                                    />
+                                    <label
+                                        for="cor_amarelo_4"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="5" style="display: none">
+                    <div class="pergunta">
+                        <img
+                            src="{{ url_for('static', filename='static/image/Imagem3.png') }}"
+                            alt="Ilustração da história do Felipe"
+                            class="pergunta-imagem"
+                        />
+
+                        <p>
+                            <strong
+                                >Em algumas conversas, o entusiasmo por um
+                                assunto pode ser tão grande que se torna difícil
+                                conter a vontade de falar. Às vezes, a fala vem
+                                como um impulso, uma ideia ou detalhe importante
+                                surge e precisa ser falado antes que desapareça
+                                da cabeça. Então, a pessoa age de maneira
+                                espontânea, falando em tempo real, tudo que vai
+                                surgindo em sua mente. Esse é o caso da Camila,
+                                a personagem da história abaixo.</strong
+                            >
+                        </p>
+                        <p style="margin-top: 15px">
+                            <strong>“Pera ai, pera ai”</strong>
+                        </p>
+                        <p>Personagem principal: Camila, 27 anos</p>
+                        <p>
+                            Ambiente: barzinho tranquilo, encontro com dois
+                            amigos próximos
+                        </p>
+                        <p style="margin-top: 10px">
+                            Camila adora quando o grupo se encontra. Está
+                            animada para falar sobre o documentário que assistiu
+                            na noite anterior, ela achou incrível, e não para de
+                            pensar nas conexões com a seu trabalho.No encontro,
+                            Camila fala com entusiasmo, enquanto um dos amigos
+                            tenta comentar algo sobre o documentário, sem
+                            perceber Camila o interrompe. “Pera ai, rapidinho,
+                            sabe o que é mais curioso ainda? No episódio três…”
+                            A outra amiga tenta dar uma opinião, mas Camila
+                            continua. “Pera aí, pera ai! Você viu que aquilo
+                            aconteceu porque ......” .
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Uma situação parecida com a da história já
+                                aconteceu com você?</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_5"
+                                    value="sim"
+                                    id="opt_sim_5"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_5"
+                                    value="nao"
+                                    id="opt_nao_5"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_5"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_5"
+                                        value="vermelho"
+                                        id="cor_vermelho_5"
+                                    />
+                                    <label
+                                        for="cor_vermelho_5"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_5"
+                                        value="laranja"
+                                        id="cor_laranja_5"
+                                    />
+                                    <label
+                                        for="cor_laranja_5"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_5"
+                                        value="amarelo"
+                                        id="cor_amarelo_5"
+                                    />
+                                    <label
+                                        for="cor_amarelo_5"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                            <div
+                                id="opcoes_frequencia_5"
+                                class="pergunta copos-opcoes"
+                                style="display: none"
+                            >
+                                <p>
+                                    <strong
+                                        >Com que frequência isso
+                                        acontece?</strong
+                                    >
+                                </p>
+                                <div class="alternativas copos-opcoes">
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_5"
+                                            value="a"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo1.png') }}"
+                                            alt="Quase nunca acontece"
+                                        />
+                                        <span>Quase nunca acontece</span>
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_5"
+                                            value="b"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo2.png') }}"
+                                            alt="Acontece, mas é raro"
+                                        />
+                                        <span>Acontece, mas é raro</span>
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_5"
+                                            value="c"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo3.png') }}"
+                                            alt="Acontece de vez em quando"
+                                        />
+                                        <span>Acontece de vez em quando</span>
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_5"
+                                            value="d"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo4.png') }}"
+                                            alt="Acontece com certa frequência"
+                                        />
+                                        <span
+                                            >Acontece com certa frequência</span
+                                        >
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_5"
+                                            value="e"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo5.png') }}"
+                                            alt="Acontece bastante"
+                                        />
+                                        <span>Acontece bastante</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-step" data-step="6" style="display: none">
+                    <div class="pergunta">
+                        <p>
+                            <strong
+                                >Algumas situações deixam marcas que o
+                                pensamento não consegue soltar com facilidade.
+                                Mesmo depois de uma conversa já ter terminado,
+                                certas palavras continuam ecoando, como se
+                                precisassem ser revistas, reavaliadas,
+                                reorganizadas. Às vezes, isso acontece durante
+                                horas, dias e até semanas. Esse é o caso da
+                                Letícia, a personagem da história
+                                abaixo.</strong
+                            >
+                        </p>
+                        <p style="margin-top: 15px">
+                            <strong>“Aquilo não sai da minha cabeça”</strong>
+                        </p>
+                        <p>Personagem principal: Letícia, 31 anos</p>
+                        <p>Ambiente: trabalho e casa</p>
+                        <p style="margin-top: 10px">
+                            Letícia é uma ótima profissional e gosta muito de
+                            seu trabalho. Certo dia, em uma reunião, o gerente
+                            diz que os relatórios de Letícia estão bons, “mas
+                            que talvez ela devesse ser menos detalhista, ir mais
+                            direto ao ponto”. Ele fala em tom leve, como se
+                            fosse só uma sugestão. Letícia sorri, agradece e
+                            anota. Mas, por dentro, a frase se repete sem parar.
+                            “Menos detalhista... O que ele quis dizer com isso?
+                            Que eu complico? Que estou fazendo errado?” Durante
+                            o resto do dia, ela tenta focar, mas volta e meia se
+                            perde nos próprios pensamentos. No ônibus de volta
+                            para casa, continua ruminando. Quando chega, conta
+                            para companheiro. Ele diz que parece algo pequeno e
+                            que ela não deveria ficar se preocupando com isso.
+                            Ela vai dormir com o assunto ainda rondando. No dia
+                            seguinte, acorda pensando no mesmo trecho da
+                            reunião, e por muitos dias, o assunto ainda ecoa em
+                            sua mente.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Uma situação parecida com a da história já
+                                aconteceu com você?</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_6"
+                                    value="sim"
+                                    id="opt_sim_6"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_6"
+                                    value="nao"
+                                    id="opt_nao_6"
+                                />
+                                Não
+                            </label>
+                        </div>
+                    </div>
+
+                    <div
+                        id="pergunta_cor_6"
+                        class="pergunta"
+                        style="display: none"
+                    >
+                        <p>
+                            <strong
+                                >De forma intuitiva, ou seja, sem racionalizar
+                                muito, escolha a cor que melhor representa a
+                                intensidade com que suas emoções se manifestam
+                                quando esse tipo de situação acontece.</strong
+                            >
+                        </p>
+                        <div class="alternativas color-options-container">
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_6"
+                                    value="vermelho"
+                                    id="cor_vermelho_6"
+                                />
+                                <label
+                                    for="cor_vermelho_6"
+                                    class="color-circle red"
+                                    title="Vermelho"
+                                ></label>
+                            </div>
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_6"
+                                    value="laranja"
+                                    id="cor_laranja_6"
+                                />
+                                <label
+                                    for="cor_laranja_6"
+                                    class="color-circle orange"
+                                    title="Laranja"
+                                ></label>
+                            </div>
+                            <div class="color-option">
+                                <input
+                                    type="radio"
+                                    name="intensidade_emocional_6"
+                                    value="amarelo"
+                                    id="cor_amarelo_6"
+                                />
+                                <label
+                                    for="cor_amarelo_6"
+                                    class="color-circle yellow"
+                                    title="Amarelo"
+                                ></label>
+                            </div>
+                        </div>
+                        <div
+                            id="opcoes_frequencia_6_copos"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >Com que frequência isso acontece?</strong
+                                >
+                            </p>
+                            <div class="alternativas copos-opcoes">
+                                <label class="copo-option">
+                                    <input
+                                        type="radio"
+                                        name="frequencia_6"
+                                        value="a"
+                                    />
+                                    <img
+                                        src="{{ url_for('static', filename='static/image/copo1.png') }}"
+                                        alt="Quase nunca acontece"
+                                    />
+                                    <span>Quase nunca acontece</span>
+                                </label>
+
+                                <label class="copo-option">
+                                    <input
+                                        type="radio"
+                                        name="frequencia_6"
+                                        value="b"
+                                    />
+                                    <img
+                                        src="{{ url_for('static', filename='static/image/copo2.png') }}"
+                                        alt="Acontece, mas é raro"
+                                    />
+                                    <span>Acontece, mas é raro</span>
+                                </label>
+
+                                <label class="copo-option">
+                                    <input
+                                        type="radio"
+                                        name="frequencia_6"
+                                        value="c"
+                                    />
+                                    <img
+                                        src="{{ url_for('static', filename='static/image/copo3.png') }}"
+                                        alt="Acontece de vez em quando"
+                                    />
+                                    <span>Acontece de vez em quando</span>
+                                </label>
+
+                                <label class="copo-option">
+                                    <input
+                                        type="radio"
+                                        name="frequencia_6"
+                                        value="d"
+                                    />
+                                    <img
+                                        src="{{ url_for('static', filename='static/image/copo4.png') }}"
+                                        alt="Acontece com certa frequência"
+                                    />
+                                    <span>Acontece com certa frequência</span>
+                                </label>
+
+                                <label class="copo-option">
+                                    <input
+                                        type="radio"
+                                        name="frequencia_6"
+                                        value="e"
+                                    />
+                                    <img
+                                        src="{{ url_for('static', filename='static/image/copo5.png') }}"
+                                        alt="Acontece bastante"
+                                    />
+                                    <span>Acontece bastante</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="7" style="display: none">
+                    <div class="pergunta">
+                        <p>
+                            <strong
+                                >Em relacionamentos próximos, é comum que as
+                                pessoas falem sobre o que gostam, compartilhem
+                                descobertas ou comentem assuntos importantes pra
+                                elas. Mesmo que o tema não desperte o mesmo
+                                interesse, espera-se algum envolvimento,
+                                comentários ou reações. Para algumas pessoas,
+                                isso pode ser difícil ,não por desatenção, mas
+                                porque nem sempre faz sentido falar algo que não
+                                é o que realmente pensam ou sentem. Esse é o
+                                caso do André, o personagem da história
+                                abaixo.</strong
+                            >
+                        </p>
+                        <p style="margin-top: 15px">
+                            <strong>“Ah... que legal.”</strong>
+                        </p>
+                        <p>Personagem principal: André, 35 anos</p>
+                        <p>Ambiente: em casa com o companheiro.</p>
+                        <p style="margin-top: 10px">
+                            A namorada de André está animada. Descobriu uma
+                            exposição sobre arquitetura japonesa que abre no fim
+                            de semana. Ela fala com empolgação, descreve
+                            detalhes, mostra o site no celular. André escuta
+                            tudo em silêncio. No fim, responde: “Ah... que
+                            legal.” A companheira espera mais — talvez uma
+                            pergunta, uma sugestão, um comentário. Mas André não
+                            diz mais nada. A companheira muda de assunto. André
+                            percebe um leve incômodo no ar, mas não sabe
+                            exatamente o que causou aquilo.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Você já esteve em uma conversa onde o outro
+                                falava com empolgação sobre algo, e você
+                                respondeu com frases curtas, não porque não se
+                                importava, mas porque não sabia o que dizer?Ou
+                                porque achou que não fazia sentido comentar algo
+                                que não fosse realmente verdadeiro pra você?
+                                Pode ter sido com um parceiro romântico, mas
+                                também com amigos, familiares ou
+                                colegas.</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_7"
+                                    value="sim"
+                                    id="opt_sim_7"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_7"
+                                    value="nao"
+                                    id="opt_nao_7"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="opcoes_frequencia_7"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >Com que frequência isso acontece?</strong
+                                >
+                            </p>
+                            <div class="alternativas">
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_7"
+                                        value="a"
+                                        id="frequencia_7_a"
+                                    />
+                                    Quase Nunca
+                                    <span class="descricao"
+                                        >(Aconteceu 1 ou 2 vezes, mas não é
+                                        comum)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_7"
+                                        value="b"
+                                        id="frequencia_7_b"
+                                    />
+                                    Raramente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes ao ano, mas não
+                                        frequentemente)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_7"
+                                        value="c"
+                                        id="frequencia_7_c"
+                                    />
+                                    Ocasionalmente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes por mês, é
+                                        notável)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_7"
+                                        value="d"
+                                        id="frequencia_7_d"
+                                    />
+                                    Muito Frequentemente
+                                    <span class="descricao"
+                                        >(Acontece várias vezes por
+                                        semana)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_7"
+                                        value="e"
+                                        id="frequencia_7_e"
+                                    />
+                                    Quase Sempre
+                                    <span class="descricao"
+                                        >(Acontece quase todos os dias ou várias
+                                        vezes ao dia)</span
+                                    ></label
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_7"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_7"
+                                        value="vermelho"
+                                        id="cor_vermelho_7"
+                                    />
+                                    <label
+                                        for="cor_vermelho_7"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_7"
+                                        value="laranja"
+                                        id="cor_laranja_7"
+                                    />
+                                    <label
+                                        for="cor_laranja_7"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_7"
+                                        value="amarelo"
+                                        id="cor_amarelo_7"
+                                    />
+                                    <label
+                                        for="cor_amarelo_7"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="8" style="display: none">
+                    <div class="pergunta">
+                        <p>
+                            <strong
+                                >Manter a casa em ordem pode exigir
+                                planejamento, memória, atenção a detalhes e uma
+                                sequência de ações que nem sempre são tão
+                                simples quanto parecem. Para algumas pessoas,
+                                essas atividades podem se tornar confusas ou até
+                                sobrecarregantes. Às vezes, elas nem percebem
+                                que algo precisa ser feito, ou não sabem por
+                                onde começar. Isso pode gerar tensão quando
+                                outras pessoas da casa têm expectativas
+                                diferentes. Esse é o caso do Eduardo, o
+                                personagem da história abaixo.</strong
+                            >
+                        </p>
+                        <p style="margin-top: 15px">
+                            <strong>“Eu não tinha reparado”</strong>
+                        </p>
+                        <p>Personagem principal: Eduardo, 37 anos.</p>
+                        <p>Ambiente: casa onde mora com o companheiro.</p>
+                        <p style="margin-top: 10px">
+                            Eduardo trabalha homeoffice. Sua companheira chega
+                            em casa depois do trabalho. A cozinha ainda está
+                            bagunçada desde o almoço, o cesto de roupas sujas
+                            continua no corredor e o lixo da sala não foi levado
+                            para fora. Eduardo está no sofá, com o notebook no
+                            colo. Quando a parceira pergunta sobre a bagunça,
+                            ele responde com naturalidade: “Eu nem reparei.. Ia
+                            fazer já já”. Eduardo não percebeu a urgência e nem
+                            que a pia estava cheia de louça do almoço. Ao olhar
+                            agora, até sente que deveria ter feito, mas a ideia
+                            só surgiu que a companheira o questionou.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Você já se deu conta de que esqueceu ou não
+                                percebeu que precisava fazer alguma tarefa
+                                doméstica, como limpar, organizar ou jogar algo
+                                fora, só depois que alguém chamou a sua atenção?
+                                E isso acabou gerando conflito ou mal-estar na
+                                convivência? Talvez tenha acontecido com um
+                                companheiro(a), mas também pode ter sido com
+                                familiares, colegas de apartamento ou outras
+                                pessoas com quem você dividiu a casa.</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_8"
+                                    value="sim"
+                                    id="opt_sim_8"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_8"
+                                    value="nao"
+                                    id="opt_nao_8"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="opcoes_frequencia_8"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >Com que frequência isso acontece?</strong
+                                >
+                            </p>
+                            <div class="alternativas">
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_8"
+                                        value="a"
+                                        id="frequencia_8_a"
+                                    />
+                                    Quase Nunca
+                                    <span class="descricao"
+                                        >(Aconteceu 1 ou 2 vezes, mas não é
+                                        comum)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_8"
+                                        value="b"
+                                        id="frequencia_8_b"
+                                    />
+                                    Raramente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes ao ano, mas não
+                                        frequentemente)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_8"
+                                        value="c"
+                                        id="frequencia_8_c"
+                                    />
+                                    Ocasionalmente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes por mês, é
+                                        notável)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_8"
+                                        value="d"
+                                        id="frequencia_8_d"
+                                    />
+                                    Muito Frequentemente
+                                    <span class="descricao"
+                                        >(Acontece várias vezes por
+                                        semana)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_8"
+                                        value="e"
+                                        id="frequencia_8_e"
+                                    />
+                                    Quase Sempre
+                                    <span class="descricao"
+                                        >(Acontece quase todos os dias ou várias
+                                        vezes ao dia)</span
+                                    ></label
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_8"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_8"
+                                        value="vermelho"
+                                        id="cor_vermelho_8"
+                                    />
+                                    <label
+                                        for="cor_vermelho_8"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_8"
+                                        value="laranja"
+                                        id="cor_laranja_8"
+                                    />
+                                    <label
+                                        for="cor_laranja_8"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_8"
+                                        value="amarelo"
+                                        id="cor_amarelo_8"
+                                    />
+                                    <label
+                                        for="cor_amarelo_8"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="9" style="display: none">
+                    <div class="pergunta">
+                        <img
+                            src="{{ url_for('static', filename='static/image/Imagem5.png') }}"
+                            alt="Ilustração da história da Helena"
+                            class="pergunta-imagem"
+                        />
+                        <p style="margin-top: 15px">
+                            <strong>“Ninguém vai falar nada?”</strong>
+                        </p>
+                        <p>
+                            Personagem principal: Helena, 22 anos, estudante de
+                            Letras
+                        </p>
+                        <p>Ambiente: sala de aula na faculdade</p>
+                        <p style="margin-top: 10px">
+                            Durante uma aula, um professor faz uma piada com
+                            sotaques regionais. A turma ri. Mas Helena olha
+                            séria para o colega ao lado, que é do interior e
+                            parece desconfortável. Sem pensar duas vezes, ela
+                            levanta a mão. “Professor, isso é preconceito
+                            linguístico. Não tem graça.” A sala silencia. O
+                            professor tenta amenizar: “Foi só uma brincadeira…”
+                            Helena insiste: “Brincadeira com desigualdade não é
+                            engraçada.” Depois da aula, duas colegas comentam
+                            que ela exagerou, que era só um comentário leve.
+                            Helena sente o rosto quente. Não entende por que
+                            ninguém mais se posicionou. Para ela, era óbvio que
+                            alguém precisava defender aquilo.
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Você já presenciou algo que te pareceu injusto
+                                ou errado com alguém e sentiu que precisava
+                                reagir imediatamente, mesmo quando ninguém mais
+                                falou nada? Você já defendeu alguém ou se
+                                posicionou com firmeza, e depois teve a sensação
+                                de que os outros acharam sua reação exagerada?
+                                Esse tipo de situação pode ter sido na
+                                faculdade, mas também em outras situações, como
+                                no trabalho, em casa ou em grupos
+                                sociais.</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_9"
+                                    value="sim"
+                                    id="opt_sim_9"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_9"
+                                    value="nao"
+                                    id="opt_nao_9"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="opcoes_frequencia_9"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >Com que frequência isso acontece?</strong
+                                >
+                            </p>
+                            <div class="alternativas">
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_9"
+                                        value="a"
+                                        id="frequencia_9_a"
+                                    />
+                                    Quase Nunca
+                                    <span class="descricao"
+                                        >(Aconteceu 1 ou 2 vezes, mas não é
+                                        comum)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_9"
+                                        value="b"
+                                        id="frequencia_9_b"
+                                    />
+                                    Raramente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes ao ano, mas não
+                                        frequentemente)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_9"
+                                        value="c"
+                                        id="frequencia_9_c"
+                                    />
+                                    Ocasionalmente
+                                    <span class="descricao"
+                                        >(Acontece algumas vezes por mês, é
+                                        notável)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_9"
+                                        value="d"
+                                        id="frequencia_9_d"
+                                    />
+                                    Muito Frequentemente
+                                    <span class="descricao"
+                                        >(Acontece várias vezes por
+                                        semana)</span
+                                    ></label
+                                ><br />
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="frequencia_9"
+                                        value="e"
+                                        id="frequencia_9_e"
+                                    />
+                                    Quase Sempre
+                                    <span class="descricao"
+                                        >(Acontece quase todos os dias ou várias
+                                        vezes ao dia)</span
+                                    ></label
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_9"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_9"
+                                        value="vermelho"
+                                        id="cor_vermelho_9"
+                                    />
+                                    <label
+                                        for="cor_vermelho_9"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_9"
+                                        value="laranja"
+                                        id="cor_laranja_9"
+                                    />
+                                    <label
+                                        for="cor_laranja_9"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_9"
+                                        value="amarelo"
+                                        id="cor_amarelo_9"
+                                    />
+                                    <label
+                                        for="cor_amarelo_9"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="10" style="display: none">
+                    <div class="pergunta">
+                        <img
+                            src="{{ url_for('static', filename='static/image/Imagem6.png') }}"
+                            alt="Ilustração da história do Felipe"
+                            class="pergunta-imagem"
+                        />
+
+                        <p>
+                            <strong
+                                >Em relações próximas — como com amigos,
+                                familiares ou parceiros românticos — é comum que
+                                haja uma troca de experiências, sentimentos e
+                                relatos do dia a dia. Compartilhar o que
+                                aconteceu, ouvir com atenção e demonstrar
+                                interesse pelo que o outro está contando são
+                                comportamentos esperados em interações mais
+                                íntimas. No entanto, algumas pessoas, mesmo
+                                tendo afeto e consideração, podem não perceber
+                                que suas conversas acabam girando apenas em
+                                torno das próprias vivências. Elas escutam o que
+                                o outro diz, mas não interagem verbalmente de
+                                forma que demonstre curiosidade ou envolvimento.
+                                Por exemplo, quando alguém compartilha como foi
+                                o dia, elas podem ouvir em silêncio, sem fazer
+                                perguntas ou comentários que indiquem interesse,
+                                como: “Ah, é mesmo? Que interessante…”, “Sério
+                                que ele te falou isso?”, ou “Nossa, me conta
+                                mais sobre isso”.</strong
+                            >
+                        </p>
+
+                        <p style="margin-top: 15px">
+                            <strong
+                                >"Ah, eu nem tinha pensado em te
+                                perguntar"</strong
+                            >
+                        </p>
+                        <p>Personagem principal: Lucas, 29 anos.</p>
+                        <p>Ambiente: encontro com amigo de longa data.</p>
+                        <p style="margin-top: 10px">
+                            Lucas encontra o melhor amigo em uma cafeteria. Eles
+                            não se veem há semanas. Assim que sentam, Lucas
+                            começa a contar sobre sua rotina, o novo projeto no
+                            trabalho, os problemas com o vizinho, e a última
+                            série que assistiu. O tempo passa rápido. Quando
+                            olha o relógio, já está na hora de ir embora. O
+                            amigo não conseguiu contar as novidades. Na saída, o
+                            amigo diz: “Ah, depois te conto como foi minha prova
+                            de mestrado.” Lucas para, surpreso. “Ah é né? Foi
+                            hoje?”
+                        </p>
+
+                        <p style="margin-top: 20px">
+                            <strong
+                                >Uma situação parecida com a da história já
+                                aconteceu com você?</strong
+                            >
+                        </p>
+                        <div class="alternativas_sim_nao">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_10"
+                                    value="sim"
+                                    id="opt_sim_10"
+                                />
+                                Sim </label
+                            ><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="resposta_condicional_10"
+                                    value="nao"
+                                    id="opt_nao_10"
+                                />
+                                Não
+                            </label>
+                        </div>
+
+                        <div
+                            id="pergunta_cor_10"
+                            class="pergunta"
+                            style="display: none"
+                        >
+                            <p>
+                                <strong
+                                    >De forma intuitiva, ou seja, sem
+                                    racionalizar muito, escolha a cor que melhor
+                                    representa a intensidade com que suas
+                                    emoções se manifestam quando esse tipo de
+                                    situação acontece.</strong
+                                >
+                            </p>
+                            <div class="alternativas color-options-container">
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_10"
+                                        value="vermelho"
+                                        id="cor_vermelho_10"
+                                    />
+                                    <label
+                                        for="cor_vermelho_10"
+                                        class="color-circle red"
+                                        title="Vermelho"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_10"
+                                        value="laranja"
+                                        id="cor_laranja_10"
+                                    />
+                                    <label
+                                        for="cor_laranja_10"
+                                        class="color-circle orange"
+                                        title="Laranja"
+                                    ></label>
+                                </div>
+                                <div class="color-option">
+                                    <input
+                                        type="radio"
+                                        name="intensidade_emocional_10"
+                                        value="amarelo"
+                                        id="cor_amarelo_10"
+                                    />
+                                    <label
+                                        for="cor_amarelo_10"
+                                        class="color-circle yellow"
+                                        title="Amarelo"
+                                    ></label>
+                                </div>
+                            </div>
+                            <div
+                                id="opcoes_frequencia_10_copos"
+                                class="pergunta"
+                                style="display: none"
+                            >
+                                <p>
+                                    <strong
+                                        >Com que frequência isso
+                                        acontece?</strong
+                                    >
+                                </p>
+                                <div class="alternativas copos-opcoes">
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_10"
+                                            value="a"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo1.png') }}"
+                                            alt="Quase nunca acontece"
+                                        />
+                                        <span>Quase nunca acontece</span>
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_10"
+                                            value="b"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo2.png') }}"
+                                            alt="Acontece, mas é raro"
+                                        />
+                                        <span>Acontece, mas é raro</span>
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_10"
+                                            value="c"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo3.png') }}"
+                                            alt="Acontece de vez em quando"
+                                        />
+                                        <span>Acontece de vez em quando</span>
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_10"
+                                            value="d"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo4.png') }}"
+                                            alt="Acontece com certa frequência"
+                                        />
+                                        <span
+                                            >Acontece com certa frequência</span
+                                        >
+                                    </label>
+
+                                    <label class="copo-option">
+                                        <input
+                                            type="radio"
+                                            name="frequencia_10"
+                                            value="e"
+                                        />
+                                        <img
+                                            src="{{ url_for('static', filename='static/image/copo5.png') }}"
+                                            alt="Acontece bastante"
+                                        />
+                                        <span>Acontece bastante</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-navigation">
+                    <button type="button" id="prevBtn">Anterior</button>
+                    <button type="button" id="nextBtn">Próximo</button>
+                    <button type="submit" id="submitBtn" style="display: none">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const formSteps = Array.from(
+                        document.querySelectorAll(".form-step"),
+                    );
+                    const prevBtn = document.getElementById("prevBtn");
+                    const nextBtn = document.getElementById("nextBtn");
+                    const submitBtn = document.getElementById("submitBtn");
+                    let currentStep =
+                        Number(localStorage.getItem("currentStep")) || 0;
+
+                    // Toggle function
+                    function toggleFrequenciaEIntensidade(i, show) {
+                        const freqText = document.getElementById(
+                            `opcoes_frequencia_${i}`,
+                        );
+                        const freqCopo = document.getElementById(
+                            `opcoes_frequencia_${i}_copos`,
+                        );
+                        const cor = document.getElementById(
+                            `pergunta_cor_${i}`,
+                        );
+                        [freqText, freqCopo, cor].forEach((el) => {
+                            if (!el) return;
+                            el.style.display = show ? "block" : "none";
+                            el.querySelectorAll("input").forEach((r) => {
+                                r.required = show; // make required if showing
+                                if (!show) r.checked = false; // reset on hide
+                            });
+                        });
+                    }
+
+                    // Restore saved answers
+                    document.querySelectorAll("input").forEach((inp) => {
+                        const saved = localStorage.getItem(inp.name);
+                        if (saved !== null) {
+                            if (inp.type === "radio") {
+                                if (inp.value === saved) inp.checked = true;
+                            } else {
+                                inp.value = saved;
+                            }
+                            inp.dispatchEvent(new Event("change"));
+                        }
+                    });
+
+                    document.querySelectorAll("input").forEach((inp) => {
+                        inp.addEventListener("change", (e) => {
+                            if (e.target.name)
+                                localStorage.setItem(
+                                    e.target.name,
+                                    e.target.value,
+                                );
+                            updateNavButtons();
+                        });
+                    });
+
+                    document
+                        .querySelectorAll(
+                            'input[name^="resposta_condicional_"][value="sim"]:checked',
+                        )
+                        .forEach((inp) => {
+                            const [, idx] = inp.name.match(
+                                /^resposta_condicional_(\d+)$/,
+                            );
+                            toggleFrequenciaEIntensidade(idx, true);
+                        });
+                    // Universal change‑listener
+                    document
+                        .querySelectorAll(
+                            'input[name^="resposta_condicional_"]',
+                        )
+                        .forEach((inp) => {
+                            inp.addEventListener("change", (e) => {
+                                const [, idx] = e.target.name.match(
+                                    /^resposta_condicional_(\d+)$/,
+                                );
+                                const show = e.target.value === "sim";
+                                // Save this answer
+                                localStorage.setItem(
+                                    e.target.name,
+                                    e.target.value,
+                                );
+                                // Show/hide the dependent blocks
+                                toggleFrequenciaEIntensidade(idx, show);
+                                // Re‑evaluate navigation buttons
+                                updateNavButtons();
+                            });
+                        });
+                    document
+                        .querySelectorAll(
+                            'input:not([name^="resposta_condicional_"])',
+                        )
+                        .forEach((inp) => {
+                            inp.addEventListener("change", (e) => {
+                                if (e.target.name) {
+                                    localStorage.setItem(
+                                        e.target.name,
+                                        e.target.value,
+                                    );
+                                }
+                            });
+                            updateNavButtons();
+                        });
+
+                    // Navigation helpers
+                    function showStep(idx) {
+                        formSteps.forEach(
+                            (step, i) =>
+                                (step.style.display =
+                                    i === idx ? "block" : "none"),
+                        );
+                        currentStep = idx;
+                        localStorage.setItem("currentStep", idx);
+                        updateNavButtons();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+
+                    function updateNavButtons() {
+                        const step = formSteps[currentStep];
+                        const idx = currentStep + 1;
+                        const last = currentStep === formSteps.length - 1;
+
+                        // Show/hide navigation buttons
+                        prevBtn.style.display =
+                            currentStep === 0 ? "none" : "inline-block";
+                        nextBtn.style.display = last ? "none" : "inline-block";
+                        submitBtn.style.display = last
+                            ? "inline-block"
+                            : "none";
+
+                        const condInputs = step.querySelectorAll(
+                            `input[name="resposta_condicional_${idx}"]`,
+                        );
+                        let condValue = null;
+                        if (condInputs.length) {
+                            const checked = Array.from(condInputs).find(
+                                (r) => r.checked,
+                            );
+                            if (!checked) {
+                                nextBtn.disabled = true;
+                                return;
+                            }
+                            condValue = checked.value;
+                        }
+                        if (condValue === "nao") {
+                            nextBtn.disabled = false;
+                            return;
+                        }
+
+                        // Check frequency - text-based
+                        const freqTextInputs = step.querySelectorAll(
+                            `#opcoes_frequencia_${idx} input[type="radio"]`,
+                        );
+                        const freqTextOK = freqTextInputs.length
+                            ? Array.from(freqTextInputs).some((r) => r.checked)
+                            : true;
+
+                        // Check frequency - cup-based
+                        const freqCopoInputs = step.querySelectorAll(
+                            `#opcoes_frequencia_${idx}_copos input[type="radio"]`,
+                        );
+                        const freqCopoOK = freqCopoInputs.length
+                            ? Array.from(freqCopoInputs).some((r) => r.checked)
+                            : true;
+
+                        const freqOK = freqTextOK && freqCopoOK;
+
+                        // Check intensity (color radios)
+                        const colorInputs = step.querySelectorAll(
+                            `#pergunta_cor_${idx} input[type="radio"]`,
+                        );
+                        const colorsOK = colorInputs.length
+                            ? Array.from(colorInputs).some((r) => r.checked)
+                            : true;
+
+                        // Only enable Next if all visible/required fields are filled
+                        nextBtn.disabled = !(freqOK && colorsOK);
+                    }
+
+                    prevBtn.addEventListener("click", () =>
+                        showStep(currentStep - 1),
+                    );
+                    nextBtn.addEventListener("click", () =>
+                        showStep(currentStep + 1),
+                    );
+
+                    showStep(currentStep);
                 });
-            }
-        }
-
-        optSim.addEventListener('change', toggleFrequenciaOptions);
-        optNao.addEventListener('change', toggleFrequenciaOptions);
-
-        // Chama a função uma vez ao carregar a página para definir o estado inicial
-        toggleFrequenciaOptions();
-    </script>
-</body>
+            </script>
+        </div>
+    </body>
 </html>

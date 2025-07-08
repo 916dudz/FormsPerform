@@ -1,21 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Seu Resultado</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="result-container">
-        <h1>Seu Resultado da Avaliação</h1>
-        <p>Sua classificação é: <strong>Grupo {{ grupo }}</strong>.</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Resultado</title>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <div class="result-container">
+            <h1>Resultado da Avaliação</h1>
 
-        <div class="message-box">
-            <p>{{ mensagem }}</p>
+            <div class="message-box">
+                <p>
+                    Veja abaixo sua análise comportamental detalhada com base no
+                    modelo SWOT.
+                </p>
+            </div>
+
+            {% if forcas %}
+            <div class="message-box">
+                <h3>Pontos Fortes (Forças)</h3>
+                <ul>
+                    {% for traco, texto in forcas.items() %}
+                    <li><strong>Traço {{ traco }}:</strong> {{ texto }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %} {% if fraquezas %}
+            <div class="message-box">
+                <h3>Fraquezas</h3>
+                <ul>
+                    {% for traco, texto in fraquezas.items() %}
+                    <li><strong>Traço {{ traco }}:</strong> {{ texto }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %} {% if ameacas %}
+            <div class="message-box">
+                <h3>Ameaças</h3>
+                <ul>
+                    {% for traco, texto in ameacas.items() %}
+                    <li><strong>Traço {{ traco }}:</strong> {{ texto }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %} {% if oportunidades %}
+            <div class="message-box">
+                <h3>Oportunidades</h3>
+                <ul>
+                    {% for traco, texto in oportunidades.items() %}
+                    <li><strong>Traço {{ traco }}:</strong> {{ texto }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <a href="/" class="back-button">Voltar para o início</a>
         </div>
-
-        <a href="{{ url_for('formulario') }}" class="back-button">Fazer outra avaliação</a>
-    </div>
-</body>
+    </body>
 </html>
