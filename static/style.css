@@ -6,8 +6,8 @@
     --primary-light: #b266b2; /* A lighter purple for highlights or subtle backgrounds, maintaining neutrality. */
     --accent-color: #daa520; /* A soft goldenrod yellow, providing a warm, neutral contrast that pairs well with purple without being overly bold. */
     --secondary-color: #6a5acd; /* This muted purple-blue shade maintains neutrality, harmonizes with the primary purple, and provides a distinct yet cohesive contrast for secondary elements like buttons or icons. */
-    --background-light: #2e2e2e; /* A very light gray for clean, neutral backgrounds in light themes. */
-    --background-dark: #f5f5f5; /* A dark charcoal gray for dark theme backgrounds, neutral and professional. */
+    --background-dark: #2e2e2e; /* A very light gray for clean, neutral backgrounds in light themes. */
+    --background-light: #f5f5f5; /* A dark charcoal gray for dark theme backgrounds, neutral and professional. */
     --text-color: #333333; /* A dark gray (near black) for readable, neutral text on light backgrounds. */
     --light-text-color: #e0e0e0; /* A light gray for text on dark backgrounds, ensuring readability without stark white. */
     --border-color: #808080; /* A medium gray for neutral borders, versatile for light and dark themes. */
@@ -25,20 +25,19 @@
 
 body {
     font-family: "Poppins", sans-serif;
-    background-color: var(--background-light);
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: column; /* Alinha os itens verticalmente (um abaixo do outro) */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens verticalmente no meio da tela */
+    min-height: 100vh;
     overflow-x: hidden;
     color: var(--text-color);
     margin: 0;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     box-sizing: border-box;
     line-height: 1.6;
-
     /* Novo fundo para o body - mais limpo e sutil */
-    background: rgb(220, 190, 255);
+    background: rgb(243, 171, 225);
 }
 
 .container {
@@ -49,22 +48,17 @@ body {
     width: 100%;
     margin: 30px;
     box-sizing: border-box;
-    background: rgba(200, 200, 156, 0.7);
+    background: rgb(255, 255, 255);
     position: relative;
     overflow: hidden;
-}
 
-.container {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    padding: 1rem; /* inner padding */
 }
 
 .result-container {
-    background-color: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
     border-radius: 12px;
     box-shadow: 0 8px 20px var(--shadow-medium);
     padding: 40px;
@@ -266,6 +260,7 @@ button {
     );
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    margin: 2rem auto;
 }
 
 button:hover {
@@ -329,6 +324,7 @@ button:hover {
     );
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    margin: 2rem auto;
 }
 
 .back-button:hover {
@@ -512,6 +508,81 @@ button:hover {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.card {
+    width: 240px;
+    padding: 0 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    background: #fafafa;
+    border-radius: 20px;
+    margin-top: 2rem; /* Adiciona um espaço acima do cartão */
+    max-width: 400px; /* Define uma largura máxima */
+    margin: 2rem auto;
+}
+
+.card > * {
+    margin: 0;
+}
+
+.card__title {
+    font-size: 23px;
+    font-weight: 900;
+    color: #4b004f;
+}
+
+.card__content {
+    font-size: 13px;
+    line-height: 18px;
+    color: #333;
+}
+
+.card__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; /* Garante que o formulário ocupe a largura do card */
+}
+
+.card__form input {
+    margin-top: 10px;
+    padding: 0.6em;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    outline: 0;
+    color: black;
+}
+
+.sign-up {
+    padding: 12px 25px;
+    margin: 20px auto 0;
+    border: none; /* Botões não precisam de borda por padrão */
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--light-text-color);
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-color) 0%,
+        var(--primary-light) 100%
+    );
+    box-shadow: 0 4px 10px var(--shadow-button);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sign-up:hover {
+    opacity: 0.85;
+    transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
+} 
+
 html,
 body {
     max-width: 100%;
