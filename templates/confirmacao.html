@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Obrigado!</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+    </head>
+    <body>
+        <div class="result-container" style="text-align: center">
+            <h1>Feedback Enviado!</h1>
+            <div class="message-box">
+                <p>
+                    Obrigado pela sua contribuição. Sua resposta foi registrada
+                    com sucesso!
+                </p>
+            </div>
+            <a href="/" class="back-button" style="margin-top: 30px"
+                >Voltar para o Início</a
+            >
+        </div>
+    </body>
+</html>
