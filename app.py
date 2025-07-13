@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+import json
 
 app = Flask(__name__)
 
@@ -96,13 +97,36 @@ def resultado():
                 forcas[str(i)] = "Este traço representa uma força em seu perfil por sua estabilidade ou ausência de impacto negativo."
 
     return render_template("resultado.html",
-                           pontuacao_total=pontuacao,
-                           resultados=resultados,
-                           tipo_calculo="Com intensidade emocional",
-                           ameacas=ameacas,
-                           fraquezas=fraquezas,
-                           oportunidades=oportunidades,
-                           forcas=forcas)
+                        pontuacao_total=pontuacao,
+                        resultados=resultados,
+                        tipo_calculo="Com intensidade emocional",
+                        ameacas=ameacas,
+                        fraquezas=fraquezas,
+                        oportunidades=oportunidades,
+                        forcas=forcas)
+
+@app.route('/salvar_feedback', methods=['POST'])
+def salvar_feedback():
+    # Pega os dados enviados pelo formulário em resultado.html
+    resposta = request.form.get('resposta_discursiva')
+    swot_data_json = request.form.get('swot_data')
+
+    # Salva os dados no banco de dados
+    conn = get_db_connection()
+    conn.execute(
+        'INSERT INTO feedback (resposta_discursiva, swot_data) VALUES (?, ?)',
+        (resposta, swot_data_json)
+    )
+    conn.commit()
+    conn.close()
+
+    # Redireciona para uma página de confirmação
+    return redirect(url_for('confirmacao'))
+
+# NOVA ROTA PARA A PÁGINA DE CONFIRMAÇÃO
+@app.route('/confirmacao')
+def confirmacao():
+    return render_template('confirmacao.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
