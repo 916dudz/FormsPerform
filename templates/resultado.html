@@ -54,6 +54,67 @@
                 </ul>
             </div>
             {% endif %}
+            <div
+                class="message-box"
+                style="margin-top: 40px; border-color: #daa520"
+            >
+                <h3>Sua Opinião é Importante</h3>
+
+                <form action="{{ url_for('salvar_feedback') }}" method="POST">
+                    <div class="pergunta">
+                        <p>
+                            <strong
+                                >Com base nos resultados apresentados, como você
+                                descreveria sua experiência ou percepção sobre
+                                os traços identificados?</strong
+                            >
+                        </p>
+
+                        <textarea
+                            name="resposta_discursiva"
+                            rows="5"
+                            placeholder="Digite sua resposta aqui..."
+                            required
+                            style="
+                                width: 100%;
+                                padding: 10px;
+                                border-radius: 8px;
+                                border: 1px solid #ccc;
+                                font-family: inherit;
+                            "
+                        ></textarea>
+
+                        <input
+                            type="hidden"
+                            name="swot_data"
+                            value="{{ {'forcas': forcas, 'fraquezas': fraquezas, 'ameacas': ameacas, 'oportunidades': oportunidades}|tojson }}"
+                        />
+
+                        <button
+                            type="submit"
+                            style="
+                                width: auto;
+                                padding: 10px 20px;
+                                margin-top: 20px;
+                            "
+                        >
+                            Enviar Opinião
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <span class="card__title">Receba</span>
+
+                <p class="card__content">Receba seu resultado por e-mail.</p>
+
+                <div class="card__form">
+                    <input placeholder="Seu E-mail" type="text" />
+
+                    <button class="sign-up">Enviar</button>
+                </div>
+            </div>
 
             <a href="/" class="back-button">Voltar para o início</a>
         </div>
