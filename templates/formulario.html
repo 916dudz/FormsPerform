@@ -2273,37 +2273,6 @@
 
                         // 5) only enable Next if both freq & color pass
                         nextBtn.disabled = !(freqOK && colorsOK);
-                        console.clear(); // optional, removes clutter
-                        console.log(`[Step ${idx}]`);
-                        console.log(
-                            "Resposta condicional:",
-                            selCond ? selCond.value : "(nenhuma)",
-                        );
-                        console.log(
-                            "Frequência visível:",
-                            isVisible(
-                                step.querySelector(`#opcoes_frequencia_${idx}`),
-                            ),
-                        );
-                        console.log(
-                            "Frequência copos visível:",
-                            isVisible(
-                                step.querySelector(
-                                    `#opcoes_frequencia_${idx}_copos`,
-                                ),
-                            ),
-                        );
-                        console.log(
-                            "Cor visível:",
-                            isVisible(
-                                step.querySelector(`#pergunta_cor_${idx}`),
-                            ),
-                        );
-
-                        console.log("freqTextOK:", freqTextOK);
-                        console.log("freqCopoOK:", freqCopoOK);
-                        console.log("colorsOK:", colorsOK);
-                        console.log("Next disabled?", nextBtn.disabled);
                     }
 
                     prevBtn.addEventListener("click", () =>
