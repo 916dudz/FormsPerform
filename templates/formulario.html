@@ -976,8 +976,8 @@
                                 </div>
                             </div>
                             <div
-                                id="opcoes_frequencia_5"
-                                class="pergunta copos-opcoes"
+                                id="opcoes_frequencia_5_copos"
+                                class="pergunta"
                                 style="display: none"
                             >
                                 <p>
@@ -2210,7 +2210,6 @@
                             updateNavButtons();
                         });
 
-                    // Navigation helpers
                     function showStep(idx) {
                         formSteps.forEach(
                             (step, i) =>
@@ -2228,7 +2227,7 @@
                         const idx = currentStep + 1;
                         const last = currentStep === formSteps.length - 1;
 
-                        // Show/hide navigation buttons
+                        // show/hide Prev / Next / Submit
                         prevBtn.style.display =
                             currentStep === 0 ? "none" : "inline-block";
                         nextBtn.style.display = last ? "none" : "inline-block";
@@ -2236,52 +2235,50 @@
                             ? "inline-block"
                             : "none";
 
-                        const condInputs = step.querySelectorAll(
+                        // 1) require Sim/Não always
+                        const condEls = step.querySelectorAll(
                             `input[name="resposta_condicional_${idx}"]`,
                         );
-                        let condValue = null;
-                        if (condInputs.length) {
-                            const checked = Array.from(condInputs).find(
-                                (r) => r.checked,
-                            );
-                            if (!checked) {
-                                nextBtn.disabled = true;
-                                return;
-                            }
-                            condValue = checked.value;
+                        const selCond = Array.from(condEls).find(
+                            (r) => r.checked,
+                        );
+                        if (!selCond) {
+                            nextBtn.disabled = true;
+                            return;
                         }
+                        const condValue = selCond.value.toLowerCase();
+
+                        // 2) if “nao”, skip everything else
                         if (condValue === "nao") {
                             nextBtn.disabled = false;
                             return;
                         }
+                        function isVisible(el) {
+                            return el && el.offsetParent !== null;
+                        }
 
-                        // Check frequency - text-based
-                        const freqTextInputs = step.querySelectorAll(
-                            `#opcoes_frequencia_${idx} input[type="radio"]`,
+                        // helper to check “at least one radio checked” in a visible container
+                        function oneChecked(selector) {
+                            const container = step.querySelector(selector);
+                            if (!isVisible(container)) return true; // hidden → skip
+                            return Array.from(
+                                container.querySelectorAll("input[type=radio]"),
+                            ).some((r) => r.checked);
+                        }
+
+                        // 3) frequency: text OR copos (whichever is visible)
+                        const freqTextOK = oneChecked(
+                            `#opcoes_frequencia_${idx}`,
                         );
-                        const freqTextOK = freqTextInputs.length
-                            ? Array.from(freqTextInputs).some((r) => r.checked)
-                            : true;
-
-                        // Check frequency - cup-based
-                        const freqCopoInputs = step.querySelectorAll(
-                            `#opcoes_frequencia_${idx}_copos input[type="radio"]`,
+                        const freqCopoOK = oneChecked(
+                            `#opcoes_frequencia_${idx}_copos`,
                         );
-                        const freqCopoOK = freqCopoInputs.length
-                            ? Array.from(freqCopoInputs).some((r) => r.checked)
-                            : true;
-
                         const freqOK = freqTextOK && freqCopoOK;
 
-                        // Check intensity (color radios)
-                        const colorInputs = step.querySelectorAll(
-                            `#pergunta_cor_${idx} input[type="radio"]`,
-                        );
-                        const colorsOK = colorInputs.length
-                            ? Array.from(colorInputs).some((r) => r.checked)
-                            : true;
+                        // 4) intensity: colors
+                        const colorsOK = oneChecked(`#pergunta_cor_${idx}`);
 
-                        // Only enable Next if all visible/required fields are filled
+                        // 5) only enable Next if both freq & color pass
                         nextBtn.disabled = !(freqOK && colorsOK);
                     }
 
