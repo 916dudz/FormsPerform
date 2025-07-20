@@ -2100,119 +2100,35 @@
                 </div>
             </form>
             <script>
-                document.addEventListener("DOMContentLoaded", () => {
+                document.addEventListener("DOMContentLoaded", function () {
                     const formSteps = Array.from(
                         document.querySelectorAll(".form-step"),
                     );
+                    let currentStep = 0;
+
                     const prevBtn = document.getElementById("prevBtn");
                     const nextBtn = document.getElementById("nextBtn");
                     const submitBtn = document.getElementById("submitBtn");
-                    let currentStep =
-                        Number(localStorage.getItem("currentStep")) || 0;
 
-                    // Toggle function
-                    function toggleFrequenciaEIntensidade(i, show) {
-                        const freqText = document.getElementById(
-                            `opcoes_frequencia_${i}`,
-                        );
-                        const freqCopo = document.getElementById(
-                            `opcoes_frequencia_${i}_copos`,
-                        );
-                        const cor = document.getElementById(
-                            `pergunta_cor_${i}`,
-                        );
-                        [freqText, freqCopo, cor].forEach((el) => {
-                            if (!el) return;
-                            el.style.display = show ? "block" : "none";
-                            el.querySelectorAll("input").forEach((r) => {
-                                r.required = show; // make required if showing
-                                if (!show) r.checked = false; // reset on hide
-                            });
+                    function showFormStep(step) {
+                        formSteps.forEach((formStep, index) => {
+                            formStep.style.display =
+                                index === step ? "block" : "none";
                         });
+
+                        updateNavButtons();
                     }
 
-                    // Restore saved answers
-                    document.querySelectorAll("input").forEach((inp) => {
-                        const saved = localStorage.getItem(inp.name);
-                        if (saved !== null) {
-                            if (inp.type === "radio") {
-                                if (inp.value === saved) inp.checked = true;
-                            } else {
-                                inp.value = saved;
-                            }
-                            inp.dispatchEvent(new Event("change"));
-                        }
-                    });
+                    function isVisible(el) {
+                        return el && el.offsetParent !== null;
+                    }
 
-                    document.querySelectorAll("input").forEach((inp) => {
-                        inp.addEventListener("change", (e) => {
-                            if (e.target.name)
-                                localStorage.setItem(
-                                    e.target.name,
-                                    e.target.value,
-                                );
-                            updateNavButtons();
-                        });
-                    });
-
-                    document
-                        .querySelectorAll(
-                            'input[name^="resposta_condicional_"][value="sim"]:checked',
-                        )
-                        .forEach((inp) => {
-                            const [, idx] = inp.name.match(
-                                /^resposta_condicional_(\d+)$/,
-                            );
-                            toggleFrequenciaEIntensidade(idx, true);
-                        });
-                    // Universal change‑listener
-                    document
-                        .querySelectorAll(
-                            'input[name^="resposta_condicional_"]',
-                        )
-                        .forEach((inp) => {
-                            inp.addEventListener("change", (e) => {
-                                const [, idx] = e.target.name.match(
-                                    /^resposta_condicional_(\d+)$/,
-                                );
-                                const show = e.target.value === "sim";
-                                // Save this answer
-                                localStorage.setItem(
-                                    e.target.name,
-                                    e.target.value,
-                                );
-                                // Show/hide the dependent blocks
-                                toggleFrequenciaEIntensidade(idx, show);
-                                // Re‑evaluate navigation buttons
-                                updateNavButtons();
-                            });
-                        });
-                    document
-                        .querySelectorAll(
-                            'input:not([name^="resposta_condicional_"])',
-                        )
-                        .forEach((inp) => {
-                            inp.addEventListener("change", (e) => {
-                                if (e.target.name) {
-                                    localStorage.setItem(
-                                        e.target.name,
-                                        e.target.value,
-                                    );
-                                }
-                            });
-                            updateNavButtons();
-                        });
-
-                    function showStep(idx) {
-                        formSteps.forEach(
-                            (step, i) =>
-                                (step.style.display =
-                                    i === idx ? "block" : "none"),
-                        );
-                        currentStep = idx;
-                        localStorage.setItem("currentStep", idx);
-                        updateNavButtons();
-                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    function oneChecked(containerSelector, step) {
+                        const container = step.querySelector(containerSelector);
+                        if (!isVisible(container)) return true;
+                        return Array.from(
+                            container.querySelectorAll("input[type=radio]"),
+                        ).some((input) => input.checked);
                     }
 
                     function updateNavButtons() {
@@ -2220,7 +2136,6 @@
                         const idx = currentStep + 1;
                         const last = currentStep === formSteps.length - 1;
 
-                        // show/hide Prev / Next / Submit
                         prevBtn.style.display =
                             currentStep === 0 ? "none" : "inline-block";
                         nextBtn.style.display = last ? "none" : "inline-block";
@@ -2228,61 +2143,106 @@
                             ? "inline-block"
                             : "none";
 
-                        // 1) require Sim/Não always
-                        const condEls = step.querySelectorAll(
-                            `input[name="resposta_condicional_${idx}"]`,
-                        );
-                        const selCond = Array.from(condEls).find(
-                            (r) => r.checked,
+                        const selCond = step.querySelector(
+                            `input[name="resposta_condicional_${idx}"]:checked`,
                         );
                         if (!selCond) {
                             nextBtn.disabled = true;
+                            submitBtn.disabled = true;
                             return;
                         }
-                        const condValue = selCond.value.toLowerCase();
 
-                        // 2) if “nao”, skip everything else
+                        const condValue = selCond.value.toLowerCase();
                         if (condValue === "nao") {
                             nextBtn.disabled = false;
+                            submitBtn.disabled = false;
                             return;
                         }
-                        function isVisible(el) {
-                            return el && el.offsetParent !== null;
-                        }
 
-                        // helper to check “at least one radio checked” in a visible container
-                        function oneChecked(selector) {
-                            const container = step.querySelector(selector);
-                            if (!isVisible(container)) return true; // hidden → skip
-                            return Array.from(
-                                container.querySelectorAll("input[type=radio]"),
-                            ).some((r) => r.checked);
-                        }
-
-                        // 3) frequency: text OR copos (whichever is visible)
                         const freqTextOK = oneChecked(
                             `#opcoes_frequencia_${idx}`,
+                            step,
                         );
                         const freqCopoOK = oneChecked(
                             `#opcoes_frequencia_${idx}_copos`,
+                            step,
                         );
-                        const freqOK = freqTextOK || freqCopoOK;
+                        const freqOK = freqTextOK && freqCopoOK;
 
-                        // 4) intensity: colors
-                        const colorsOK = oneChecked(`#pergunta_cor_${idx}`);
+                        const colorsOK = oneChecked(
+                            `#pergunta_cor_${idx}`,
+                            step,
+                        );
 
-                        // 5) only enable Next if both freq & color pass
                         nextBtn.disabled = !(freqOK && colorsOK);
+                        submitBtn.disabled = !(freqOK && colorsOK);
                     }
 
-                    prevBtn.addEventListener("click", () =>
-                        showStep(currentStep - 1),
-                    );
-                    nextBtn.addEventListener("click", () =>
-                        showStep(currentStep + 1),
-                    );
+                    function updateQuestionVisibility(idx) {
+                        const simRadio = document.querySelector(
+                            `input[name="resposta_condicional_${idx}"][value="sim"]`,
+                        );
+                        const showExtra = simRadio && simRadio.checked;
 
-                    showStep(currentStep);
+                        const freqTextDiv = document.querySelector(
+                            `#opcoes_frequencia_${idx}`,
+                        );
+                        const freqCoposDiv = document.querySelector(
+                            `#opcoes_frequencia_${idx}_copos`,
+                        );
+                        const colorDiv = document.querySelector(
+                            `#pergunta_cor_${idx}`,
+                        );
+
+                        if (freqTextDiv)
+                            freqTextDiv.style.display = showExtra
+                                ? "block"
+                                : "none";
+                        if (freqCoposDiv)
+                            freqCoposDiv.style.display = showExtra
+                                ? "block"
+                                : "none";
+                        if (colorDiv)
+                            colorDiv.style.display = showExtra
+                                ? "block"
+                                : "none";
+
+                        updateNavButtons();
+                    }
+
+                    nextBtn.addEventListener("click", function () {
+                        if (currentStep < formSteps.length - 1) {
+                            currentStep++;
+                            showFormStep(currentStep);
+                        }
+                    });
+
+                    prevBtn.addEventListener("click", function () {
+                        if (currentStep > 0) {
+                            currentStep--;
+                            showFormStep(currentStep);
+                        }
+                    });
+
+                    formSteps.forEach((step, index) => {
+                        const idx = index + 1;
+                        const radios = step.querySelectorAll(
+                            `input[name="resposta_condicional_${idx}"]`,
+                        );
+                        radios.forEach((radio) => {
+                            radio.addEventListener("change", () => {
+                                updateQuestionVisibility(idx);
+                            });
+                        });
+
+                        const allInputs =
+                            step.querySelectorAll("input[type=radio]");
+                        allInputs.forEach((input) => {
+                            input.addEventListener("change", updateNavButtons);
+                        });
+                    });
+
+                    showFormStep(currentStep);
                 });
             </script>
         </div>

@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+import json
 
 app = Flask(__name__)
 
@@ -62,6 +63,7 @@ def formulario():
 @app.route("/resultado", methods=["POST"])
 def resultado():
     resultados = {}
+    indicacoes = {}
     oportunidades = {}
     forcas = {}
     fraquezas = {}
@@ -94,33 +96,69 @@ def resultado():
             if POTENCIAIS_Oportunidades.get(str(i), False):
                 forcas[str(i)] = "Este traço representa uma força em seu perfil por sua estabilidade ou ausência de impacto negativo."
 
-    return render_template("resultado.html",
-                pontuacao_total=pontuacao,
-                resultados=resultados,
-                tipo_calculo="Com intensidade emocional",
-                ameacas=ameacas,
-                fraquezas=fraquezas,
-                oportunidades=oportunidades,
-                forcas=forcas)
+    # Transforma os resultados SWOT em texto JSON
+    swot_data_json = json.dumps({
+        'forcas': forcas, 'fraquezas': fraquezas,
+        'ameacas': ameacas, 'oportunidades': oportunidades
+    })
 
-@app.route("/salvar_feedback", methods=["POST"])
-def salvar_feedback():
-# Pega os dados enviados pelo formulário em resultado.html
-    resposta = request.form.get("resposta_discursiva")
-    swot_data_json = request.form.get('swot_data')
-
-# Salva os dados no banco de dados
+    # Conecta ao DB e insere os resultados, mas com a resposta discursiva vazia
     conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        'INSERT INTO feedback (resposta_discursiva, swot_data) VALUES (?, ?)',
+        ('', swot_data_json) # Salva com resposta vazia por enquanto
+    )
+    feedback_id = cursor.lastrowid  # Pega o ID da linha que acabamos de inserir
+    conn.commit()
+    conn.close()
+
+    return render_template("resultado.html",
+                        feedback_id = feedback_id,
+                        pontuacao_total=pontuacao,
+                        resultados=resultados,
+                        tipo_calculo="Com intensidade emocional",
+                        ameacas=ameacas,
+                        fraquezas=fraquezas,
+                        oportunidades=oportunidades,
+                        forcas=forcas)
+
+# ROTA PARA MOSTRAR A PÁGINA SEPARADA
+@app.route('/pagina_discursiva/<int:feedback_id>')
+def pagina_discursiva(feedback_id):
+    # Simplesmente renderiza a nova página, passando o ID adiante
+    return render_template('discursivas.html', feedback_id=feedback_id)
+
+
+# ROTA PARA SALVAR A RESPOSTA DISCURSIVA
+@app.route('/salvar_discursiva/<int:feedback_id>', methods=['POST'])
+def salvar_discursiva(feedback_id):
+    # Coleta as respostas de todas as 7 perguntas
+    respostas = {
+        "bloco_1_q1": request.form.get('discursiva_1', ''),
+        "bloco_1_q2": request.form.get('discursiva_2', ''),
+        "bloco_1_q3": request.form.get('discursiva_3', ''),
+        "bloco_1_q4": request.form.get('discursiva_4', ''),
+        "bloco_2_q5": request.form.get('discursiva_5', ''),
+        "bloco_2_q6": request.form.get('discursiva_6', ''),
+        "bloco_2_q7": request.form.get('discursiva_7', '')
+    }
+
+    # Formata as respostas em um único texto JSON para salvar no banco
+    # Salvar em JSON é melhor do que um texto longo, pois facilita a análise futura
+    respostas_json = json.dumps(respostas, ensure_ascii=False, indent=4)
+
+    conn = get_db_connection()
+    # Atualiza a linha existente no banco com as novas respostas discursivas
     conn.execute(
-        "INSERT INTO feedback (resposta_discursiva, swot_data) VALUES (?, ?)",
-        (resposta, swot_data_json)
+        'UPDATE feedback SET resposta_discursiva = ? WHERE id = ?',
+        (respostas_json, feedback_id)
     )
     conn.commit()
     conn.close()
 
-# Redireciona para uma página de confirmação
+    # Redireciona para a confirmação
     return redirect(url_for('confirmacao'))
-
 # NOVA ROTA PARA A PÁGINA DE CONFIRMAÇÃO
 @app.route('/confirmacao')
 def confirmacao():

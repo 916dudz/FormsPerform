@@ -444,18 +444,6 @@ button:hover {
     display: none;
 }
 
-#opt_sim:checked ~ form #opcoes_frequencia {
-    display: block;
-}
-#opt_sim:checked ~ form #pergunta_cor {
-    display: block;
-}
-#opt_nao:checked ~ form #opcoes_frequencia {
-    display: none;
-}
-#opt_nao:checked ~ form #pergunta_cor {
-    display: none;
-}
 .pergunta-imagem {
     max-width: 100%;
     height: auto;
