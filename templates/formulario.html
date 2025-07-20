@@ -2104,7 +2104,8 @@
                     const formSteps = Array.from(
                         document.querySelectorAll(".form-step"),
                     );
-                    let currentStep = 0;
+                    let currentStep =
+                        parseInt(localStorage.getItem("currentStep")) || 0;
 
                     const prevBtn = document.getElementById("prevBtn");
                     const nextBtn = document.getElementById("nextBtn");
@@ -2115,7 +2116,7 @@
                             formStep.style.display =
                                 index === step ? "block" : "none";
                         });
-
+                        localStorage.setItem("currentStep", step);
                         updateNavButtons();
                     }
 
@@ -2143,6 +2144,7 @@
                             ? "inline-block"
                             : "none";
 
+                        // Check conditional answer
                         const selCond = step.querySelector(
                             `input[name="resposta_condicional_${idx}"]:checked`,
                         );
@@ -2159,6 +2161,7 @@
                             return;
                         }
 
+                        // Frequency checks (text & copos)
                         const freqTextOK = oneChecked(
                             `#opcoes_frequencia_${idx}`,
                             step,
@@ -2169,13 +2172,21 @@
                         );
                         const freqOK = freqTextOK && freqCopoOK;
 
-                        const colorsOK = oneChecked(
-                            `#pergunta_cor_${idx}`,
-                            step,
-                        );
+                        // Color intensity check (only color-option inputs)
+                        const colorsOK = (() => {
+                            const container = step.querySelector(
+                                `#pergunta_cor_${idx}`,
+                            );
+                            if (!isVisible(container)) return true;
+                            const radios = container.querySelectorAll(
+                                ".color-option input[type=radio]",
+                            );
+                            return Array.from(radios).some((r) => r.checked);
+                        })();
 
-                        nextBtn.disabled = !(freqOK && colorsOK);
-                        submitBtn.disabled = !(freqOK && colorsOK);
+                        const canProceed = freqOK && colorsOK;
+                        nextBtn.disabled = !canProceed;
+                        submitBtn.disabled = !canProceed;
                     }
 
                     function updateQuestionVisibility(idx) {
@@ -2210,6 +2221,47 @@
                         updateNavButtons();
                     }
 
+                    // Restore saved answers and visibility
+                    formSteps.forEach((step, index) => {
+                        const idx = index + 1;
+                        const inputs =
+                            step.querySelectorAll("input[type=radio]");
+                        inputs.forEach((input) => {
+                            const saved = localStorage.getItem(input.name);
+                            if (saved && saved === input.value) {
+                                input.checked = true;
+                            }
+                        });
+                        // After restoring conditional radio, update visibility
+                        const savedCond = localStorage.getItem(
+                            `resposta_condicional_${idx}`,
+                        );
+                        if (savedCond === "sim") {
+                            updateQuestionVisibility(idx);
+                        }
+                    });
+
+                    // Bind listeners
+                    formSteps.forEach((step, index) => {
+                        const idx = index + 1;
+                        const radios =
+                            step.querySelectorAll("input[type=radio]");
+                        radios.forEach((radio) => {
+                            radio.addEventListener("change", () => {
+                                // save this answer
+                                localStorage.setItem(radio.name, radio.value);
+                                // handle visibility if conditional
+                                if (
+                                    radio.name === `resposta_condicional_${idx}`
+                                ) {
+                                    updateQuestionVisibility(idx);
+                                } else {
+                                    updateNavButtons();
+                                }
+                            });
+                        });
+                    });
+
                     nextBtn.addEventListener("click", function () {
                         if (currentStep < formSteps.length - 1) {
                             currentStep++;
@@ -2224,24 +2276,22 @@
                         }
                     });
 
-                    formSteps.forEach((step, index) => {
-                        const idx = index + 1;
-                        const radios = step.querySelectorAll(
-                            `input[name="resposta_condicional_${idx}"]`,
-                        );
-                        radios.forEach((radio) => {
-                            radio.addEventListener("change", () => {
-                                updateQuestionVisibility(idx);
-                            });
-                        });
+                    submitBtn.addEventListener("click", function () {
+                        // Optionally clear localStorage or handle form submission
+                        localStorage.removeItem("currentStep");
 
-                        const allInputs =
-                            step.querySelectorAll("input[type=radio]");
-                        allInputs.forEach((input) => {
-                            input.addEventListener("change", updateNavButtons);
+                        const formData = {};
+                        formSteps.forEach((step, index) => {
+                            const inputs = step.querySelectorAll(
+                                "input[type=radio]:checked",
+                            );
+                            inputs.forEach((input) => {
+                                formData[input.name] = input.value;
+                            });
                         });
                     });
 
+                    // Initialize
                     showFormStep(currentStep);
                 });
             </script>
