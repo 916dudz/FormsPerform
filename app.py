@@ -63,7 +63,6 @@ def formulario():
 @app.route("/resultado", methods=["POST"])
 def resultado():
     resultados = {}
-    indicacoes = {}
     oportunidades = {}
     forcas = {}
     fraquezas = {}
