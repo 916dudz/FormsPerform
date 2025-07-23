@@ -166,7 +166,7 @@ label {
         transform 0.2s ease,
         box-shadow 0.2s ease;
     position: relative;
-    overflow: hidden;
+    z-index: 1;
     border-left: 5px solid var(--primary-light);
 }
 
@@ -281,6 +281,39 @@ button:hover {
         var(--primary-dark) 0%,
         var(--primary-color) 100%
     );
+}
+
+.hover-container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 9999; /* or some high number */
+}
+
+.hover-container .tooltip {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    padding: 12px;
+    margin-top: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 1rem;
+    line-height: 1.4;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    text-align: left;
+}
+.hover-container:hover .tooltip {
+    display: block;
 }
 
 /* resultado.html */
@@ -402,6 +435,7 @@ button:hover {
     .pergunta {
         padding: 18px;
         margin-bottom: 18px;
+        position: absolute;
     }
 
     .alternativas label {
@@ -513,6 +547,7 @@ button:hover {
     margin: 2rem auto 0;
     padding-top: 1rem;
     border-top: 1px solid #ddd;
+    z-index: 1;
 }
 
 .form-navigation button:disabled {
