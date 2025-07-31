@@ -6,15 +6,12 @@
         <title>Resultado</title>
         <link rel="stylesheet" href="/static/style.css" />
     </head>
-    <body>
+    <body id="page-resultado">
         <div class="result-container">
             <h1>Resultado da Avaliação</h1>
 
             <div class="message-box">
-                <p>
-                    Veja abaixo sua análise comportamental detalhada com base no
-                    modelo SWOT.
-                </p>
+                <p>Veja abaixo sua análise comportamental detalhada com base no modelo SWOT.</p>
             </div>
 
             {% if forcas %}
@@ -26,7 +23,9 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %} {% if fraquezas %}
+            {% endif %}
+            
+            {% if fraquezas %}
             <div class="message-box">
                 <h3>Fraquezas</h3>
                 <ul>
@@ -35,7 +34,9 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %} {% if ameacas %}
+            {% endif %}
+            
+            {% if ameacas %}
             <div class="message-box">
                 <h3>Ameaças</h3>
                 <ul>
@@ -44,7 +45,9 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %} {% if oportunidades %}
+            {% endif %}
+            
+            {% if oportunidades %}
             <div class="message-box">
                 <h3>Oportunidades</h3>
                 <ul>
@@ -55,25 +58,10 @@
             </div>
             {% endif %}
 
-            <a
-                href="{{ url_for('pagina_discursiva', feedback_id=feedback_id) }}"
-                class="back-button"
-                style="margin-top: 40px; width: 60%; text-align: center"
-            >
+            <a href="{{ url_for('pagina_discursiva', feedback_id=feedback_id) }}" class="back-button" style="margin-top: 40px; width: 60%; text-align: center;">
                 Responder Perguntas de Reflexão
             </a>
-
-            <div class="card"></div>
-
-            <div class="card">
-                <span class="card__title">Receba</span>
-                <p class="card__content">Receba seu resultado por e-mail.</p>
-                <div class="card__form">
-                    <input placeholder="Seu E-mail" type="text" />
-                    <button class="sign-up">Enviar</button>
-                </div>
-            </div>
-            <a href="/" class="back-button">Voltar para o início</a>
+            
         </div>
     </body>
 </html>

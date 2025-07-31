@@ -12,7 +12,7 @@
     --light-text-color: #e0e0e0; /* A light gray for text on dark backgrounds, ensuring readability without stark white. */
     --border-color: #808080; /* A medium gray for neutral borders, versatile for light and dark themes. */
     --focus-border: #9932cc; /* A slightly more vibrant purple (dark orchid) for focus states, accessible and tied to the primary color. */
-    --success-color: #228b22; /* A forest green for success states, neutral and professional without being overly bright. */
+    --success-color: #b266b2; /* A forest green for success states, neutral and professional without being overly bright. */
     --error-color: #a52a2a; /* A muted brown-red for error states, clear but not overly aggressive. */
 
     /* Sombras */
@@ -38,7 +38,12 @@ body {
     line-height: 1.6;
 
     /* Novo fundo para o body - mais limpo e sutil */
-    background: rgb(192, 182, 242);
+    background: #f0f2f5;
+}
+
+div {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .container {
@@ -49,7 +54,7 @@ body {
     width: 100%;
     margin: 30px;
     box-sizing: border-box;
-    background: rgba(200, 200, 156, 0.7);
+    background-color: white;
     position: relative;
     overflow: hidden;
 }
@@ -67,7 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: #fafafa;
     border-radius: 12px;
     box-shadow: 0 8px 20px var(--shadow-medium);
     padding: 40px;
@@ -156,7 +161,7 @@ label {
 }
 
 .pergunta {
-    background-color: rgb(230, 230, 200);
+    background: rgb(250, 250, 230);
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 25px;
@@ -341,20 +346,6 @@ button:hover {
     box-shadow: 0 2px 8px var(--shadow-light);
     color: var(--secondary-color);
     font-size: 1.05em;
-    line-height: 1.8;
-}
-
-.message-box-discursiva {
-    background-color: rgb(250, 240, 240);
-    border-left: 6px solid var(--primary-color);
-    margin-top: 30px;
-    padding: 20px;
-    text-align: left;
-    font-style: italic;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px var(--shadow-light);
-    color: var(--secondary-color);
-    font-size: 0.9em;
     line-height: 1.8;
 }
 
@@ -639,4 +630,185 @@ html,
 body {
     max-width: 100%;
     overflow-x: hidden;
+}
+
+/* Estilos da Página de Resultado */
+.message-box {
+    background-color: #fdfdff;
+    border-left: 6px solid var(--primary-light);
+    margin-top: 30px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container,
+    .result-container {
+        padding: 25px;
+        margin-top: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .hover-container .tooltip {
+        width: 250px;
+    }
+}
+
+/* Container para os botões e formulário de e-mail */
+.user-actions {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espaço entre os elementos */
+}
+
+/* Estilo unificado para os botões de ação */
+.action-button {
+    display: block;
+    width: 100%;
+    max-width: 400px; /* Largura máxima para os botões */
+    box-sizing: border-box;
+    text-align: center;
+    padding: 12px 25px;
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-color) 0%,
+        var(--primary-light) 100%
+    );
+    color: var(--light-text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px var(--shadow-button);
+    text-transform: uppercase;
+}
+
+.action-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px var(--shadow-hover);
+}
+
+/* Variação para o botão secundário "Voltar" */
+.action-button.secondary {
+    background-image: none;
+    background-color: #f0f0f0;
+    color: var(--text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-box-discursiva {
+    background-color: rgb(250, 240, 240);
+    border-left: 6px solid var(--primary-light);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    text-align: left;
+    font-style: italic;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    color: var(--secondary-color);
+    font-size: 0.9em;
+    line-height: 1.8;
+}
+
+/* Novo estilo para as caixas de texto discursivas */
+.discursive-textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px; /* Adiciona um espaço acima da caixa */
+    border-radius: 8px;
+    border: 1px solid #dcdcdc; /* Borda mais suave */
+    font-family: "Poppins", sans-serif; /* Garante a mesma fonte do site */
+    font-size: 1em;
+    line-height: 1.5;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+    background-color: #fdfdfd;
+    transition: all 0.3s ease; /* Transição suave para o foco */
+}
+
+.discursive-textarea:focus {
+    border-color: var(--primary-color); /* Usa a sua cor primária ao focar */
+    box-shadow: 0 0 0 3px var(--focus-shadow); /* Adiciona um brilho suave */
+    outline: none;
+}
+
+.email-final-card {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    padding: 30px;
+    margin-top: 30px;
+    width: center;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.email-final-card .card__content {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.email-final-card .card__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: center;
+    box-sizing: border-box;
+}
+
+.email-final-card .card__form input {
+    width: center;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.email-final-card .card__form button.sign-up {
+    display: block !important;
+    width: center !important;
+    max-width: 400px !important;
+    font-size: 1.1em !important;
+    padding: 15px !important;
+    letter-spacing: 1px !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6em;
+    }
+    .container,
+    .result-container {
+        padding: 20px;
+    }
+    .hover-container .tooltip {
+        width: 220px;
+    }
+    button,
+    .back-button,
+    .action-button {
+        font-size: 0.95em;
+        padding: 10px 20px;
+    }
+    .color-circle {
+        width: 35px;
+        height: 35px;
+    }
 }

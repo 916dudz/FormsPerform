@@ -9,7 +9,7 @@
             href="{{ url_for('static', filename='style.css') }}"
         />
     </head>
-    <body>
+    <body id="page-discursiva">
         <div class="container" style="max-width: 800px">
             <h1>Plano de Desenvolvimento Pessoal</h1>
 
@@ -17,164 +17,167 @@
                 action="{{ url_for('salvar_discursiva', feedback_id=feedback_id) }}"
                 method="POST"
             >
-                <div
-                    class="message-box-discursiva"
-                    style="width: 94%; text-align: center; margin-bottom: 30px"
-                >
+                <div class="message-box-discursiva">
                     <h2>BLOCO 1 – Lidando com ameaças e fraquezas</h2>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >1. O que você pode fazer para reduzir o impacto
+                        <strong>
+                            1. O que você pode fazer para reduzir o impacto
                             negativo dos traços que são ameaças e fraquezas nos
-                            diferentes contextos da sua vida?</strong
-                        ><br /><small
-                            >(Ambientes: trabalho, estudo, vida social, família,
-                            amizades e relacionamento romântico)</small
-                        >
+                            diferentes contextos da sua vida?
+                        </strong>
+                        <br />
+                        <small>
+                            (Ambientes: trabalho, estudo, vida social, família,
+                            amizades e relacionamento romântico)
+                        </small>
                     </p>
                     <textarea
                         name="discursiva_1"
-                        cols="86"
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >2. O que as pessoas de cada um desses contextos
+                        <strong>
+                            2. O que as pessoas de cada um desses contextos
                             podem fazer para te ajudar a reduzir o impacto
-                            negativo desses traços?</strong
-                        ><br /><small
-                            >(O que colegas de trabalho, professores,
-                            familiares, amigos e parceiro(a) romântico(a)
-                            poderiam fazer?)</small
-                        >
+                            negativo desses traços?
+                        </strong>
+                        <br />
+                        <small>
+                            (O que colegas de trabalho, professores, familiares,
+                            amigos e parceiro(a) romântico(a) poderiam fazer?)
+                        </small>
                     </p>
                     <textarea
                         name="discursiva_2"
                         rows="5"
-                        cols="86"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >3. Você pode utilizar os traços que são forças para
-                            reduzir o impacto negativo das ameaças e
-                            fraquezas?</strong
-                        ><br /><small
-                            >Se sim, quais forças poderiam ser usadas e como
-                            elas poderiam ajudar?</small
-                        >
+                        <strong>
+                            3. Você pode utilizar os traços que são forças para
+                            reduzir o impacto negativo das ameaças e fraquezas? </strong
+                        ><br />
+                        <small>
+                            Se sim, quais forças poderiam ser usadas e como elas
+                            poderiam ajudar?
+                        </small>
                     </p>
                     <textarea
                         name="discursiva_3"
                         rows="5"
-                        cols="86"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >4. Somando tudo o que você pode fazer e o que as
+                        <strong>
+                            4. Somando tudo o que você pode fazer e o que as
                             outras pessoas podem fazer, isso seria suficiente
-                            para lidar com os impactos negativos?</strong
-                        ><br /><small
-                            >Se não, o que mais seria necessário?</small
-                        >
+                            para lidar com os impactos negativos?
+                        </strong>
+                        <br />
+                        <small> Se não, o que mais seria necessário? </small>
                     </p>
                     <textarea
                         name="discursiva_4"
                         rows="5"
-                        cols="86"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
-                <div
-                    class="message-box-discursiva"
-                    style="width: 94%; text-align: center; margin-bottom: 30px"
-                >
+                <div class="message-box-discursiva">
                     <h2>BLOCO 2 – Transformando oportunidades em forças</h2>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >5. O que você pode fazer para transformar os traços
+                        <strong>
+                            5. O que você pode fazer para transformar os traços
                             que hoje são considerados oportunidades em forças
-                            reais?</strong
-                        ><br /><small
-                            >(Quais oportunidades podem ser transformadas e como
-                            fazer isso?)</small
-                        >
+                            reais?
+                        </strong>
+                        <br />
+                        <small>
+                            (Quais oportunidades podem ser transformadas e como
+                            fazer isso?)
+                        </small>
                     </p>
                     <textarea
                         name="discursiva_5"
                         rows="5"
-                        cols="86"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >6. O que outras pessoas (em diferentes contextos)
-                            podem fazer para te ajudar nesse processo?</strong
-                        ><br /><small
+                        <strong>
+                            6. O que outras pessoas (em diferentes contextos)
+                            podem fazer para te ajudar nesse processo?
+                        </strong>
+                        <br />
+                        <small
                             >(Quais apoios seriam úteis e como eles poderiam te
-                            ajudar?)</small
-                        >
+                            ajudar?)
+                        </small>
                     </p>
                     <textarea
                         name="discursiva_6"
                         rows="5"
-                        cols="86"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
                 <div class="pergunta">
                     <p>
-                        <strong
-                            >7. As forças que você já possui podem ser usadas
+                        <strong>
+                            7. As forças que você já possui podem ser usadas
                             para ajudar na transformação dessas oportunidades em
-                            forças?</strong
-                        ><br /><small
+                            forças?
+                        </strong>
+                        <br />
+                        <small
                             >Se sim, quais forças podem ser usadas e como isso
-                            poderia acontecer?</small
-                        >
+                            poderia acontecer?
+                        </small>
                     </p>
                     <textarea
                         name="discursiva_7"
                         rows="5"
-                        cols="86"
                         placeholder="Digite sua resposta aqui..."
                         class="discursive-textarea"
                         required
-                    ></textarea>
+                    >
+                    </textarea>
                 </div>
 
                 <button type="submit" style="margin-top: 30px">

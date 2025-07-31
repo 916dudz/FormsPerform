@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Enviar Relatório por E-mail</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+    </head>
+    <body id="page-email">
+        <div class="container">
+            <h1>Etapa Final: Enviar Relatório</h1>
+
+            <div class="email-final-card">
+                <p class="card__content">
+                    As suas reflexões foram salvas com sucesso. Para receber o
+                    seu relatório completo por e-mail, por favor, insira o seu
+                    endereço abaixo.
+                </p>
+                <form
+                    action="{{ url_for('enviar_email', feedback_id=feedback_id) }}"
+                    method="POST"
+                    class="card__form"
+                >
+                    <input
+                        name="email"
+                        placeholder="Seu E-mail"
+                        type="email"
+                        required
+                    />
+                    <button class="sign-up" type="submit">
+                        Enviar Relatório por E-mail
+                    </button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
