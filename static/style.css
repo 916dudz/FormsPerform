@@ -187,6 +187,13 @@ label {
     display: block;
 }
 
+.pergunta sub {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    display: block;
+}
+
 .alternativas {
     margin-top: 15px;
     gap: 20px;

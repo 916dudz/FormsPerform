@@ -18,6 +18,8 @@ def get_db_connection():
         conn.row_factory = sqlite3.Row
         return conn
 
+traco_mat = [ {float(score): 0 for score in range(1, 96)}, {bool(isT): None for isT in range(1, 96)} ]
+
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -26,19 +28,6 @@ app.config['MAIL_PASSWORD'] = "uttzhrvdhwzcfrhj" # Sua senha de app de 16 letras
 
 mail = Mail(app)
 
-# --- DICIONÁRIOS DE REGRAS (coloque as suas regras aqui) ---
-INTENSIDADE_MAPA = {"vermelho": 3, "laranja": 2, "amarelo": 1, "nenhuma": 0}
-freq_map = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
-TRACOS = {str(i): {"min_freq": 3.0, "min_freq_int": 2.5} for i in range(1, 96)}
-RECOMENDACOES_TRACO = {str(i): f"Recomendação para o traço {i}" for i in range(1, 96)}
-POTENCIAIS_Oportunidades = {str(i): False for i in range(1, 96)}
-
-def classificar_traco(freq, intensidade, min_freq, min_freq_int):
-    intensidade_valor = INTENSIDADE_MAPA.get(intensidade.lower(), 0)
-    intensidade_normalizada = intensidade_valor * (5 / 3)
-    media = (freq + intensidade_normalizada) / 2
-    return "T" if media >= min_freq_int else "W", media
-
 @app.route("/")
 @app.route("/formulario")
 def formulario():
@@ -46,56 +35,33 @@ def formulario():
 
 @app.route("/resultado", methods=["POST"])
 def resultado():
-    # Calcular SWOT a partir do request.form
-    forcas = {}
-    fraquezas = {}
-    ameacas = {}
-    oportunidades = {}
-
     # Loop para processar os traços de 1 a 95
     for i in range(1, 96):
-        freq_key = f'freq_{i}'
-        intensidade_key = f'intensidade_{i}'
+        freq_key = f'frequencia_{i}'
+        intensidade_key = f'intensidade_emocional_{i}'
+        cond_key = f'resposta_condicional_{i}'
 
-        if freq_key in request.form and intensidade_key in request.form:
-            freq_value = request.form[freq_key]
-            intensidade_value = request.form[intensidade_key]
-
-            # Converter frequência para valor numérico
-            freq = freq_map.get(freq_value, 0)
-
-            # Obter parâmetros do traço
-            traco_params = TRACOS.get(str(i), {"min_freq": 3.0, "min_freq_int": 2.5})
-
-            # Classificar o traço
-            classificacao, media = classificar_traco(
-                freq, intensidade_value,
-                traco_params["min_freq"],
-                traco_params["min_freq_int"]
-            )
-
-            recomendacao = RECOMENDACOES_TRACO.get(str(i), f"Recomendação para o traço {i}")
-            eh_oportunidade = POTENCIAIS_Oportunidades.get(str(i), False)
-
-            traco_data = {
-                "frequencia": freq_value,
-                "intensidade": intensidade_value,
-                "media": round(media, 2),
-                "recomendacao": recomendacao
-            }
-
-            if classificacao == "T":
-                if eh_oportunidade:
-                    oportunidades[str(i)] = traco_data
+        if cond_key in request.form:
+            cond_value = request.form[cond_key]
+            if cond_value == 'sim':
+                if i < 52:
+                    if freq_key in request.form and intensidade_key in request.form:
+                        if i < 11:
+                        else:
+                            isPos = True
+                        freq_value = request.form[freq_key]
+                        intensidade_value = request.form[intensidade_key]
+                    else:
+                        abort(400, "Algum campo inválido entre as perguntas 1 - 51 (antes dos hotlinks)")
                 else:
-                    forcas[str(i)] = traco_data
-            else:  # classificacao == "W"
-                if eh_oportunidade:
-                    ameacas[str(i)] = traco_data
-                else:
-                    fraquezas[str(i)] = traco_data
+                    if freq_key in request.form:
+                        freq_value = request.form[freq_key]
+                    else:
+                        abort(400, "Algum campo inválido entre as perguntas 52 - 95 (depois dos hotlinks)")
+        else:
+            abort(400, "Alguma resposta não foi respondida 'Sim' ou 'Não'!")
 
-    swot_data_json = json.dumps({'forcas': forcas, 'fraquezas': fraquezas, 'ameacas': ameacas, 'oportunidades': oportunidades})
+        swot_data_json = json.dumps({'forcas': forcas, 'fraquezas': fraquezas, 'ameacas': ameacas, 'oportunidades': oportunidades})
 
     conn = get_db_connection()
     cursor = conn.cursor()
