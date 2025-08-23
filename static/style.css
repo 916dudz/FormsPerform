@@ -1,21 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
 :root {
-    --primary-color: #800080; /* Medium purple, the core gender-neutral shade. */
-    --primary-dark: #4b004b; /* A darker, muted purple for depth (e.g., hover states or darker UI elements). */
-    --primary-light: #b266b2; /* A lighter purple for highlights or subtle backgrounds, maintaining neutrality. */
-    --accent-color: #daa520; /* A soft goldenrod yellow, providing a warm, neutral contrast that pairs well with purple without being overly bold. */
-    --secondary-color: #6a5acd; /* This muted purple-blue shade maintains neutrality, harmonizes with the primary purple, and provides a distinct yet cohesive contrast for secondary elements like buttons or icons. */
-    --background-light: #2e2e2e; /* A very light gray for clean, neutral backgrounds in light themes. */
-    --background-dark: #f5f5f5; /* A dark charcoal gray for dark theme backgrounds, neutral and professional. */
-    --text-color: #333333; /* A dark gray (near black) for readable, neutral text on light backgrounds. */
-    --light-text-color: #e0e0e0; /* A light gray for text on dark backgrounds, ensuring readability without stark white. */
-    --border-color: #808080; /* A medium gray for neutral borders, versatile for light and dark themes. */
-    --focus-border: #9932cc; /* A slightly more vibrant purple (dark orchid) for focus states, accessible and tied to the primary color. */
-    --success-color: #b266b2; /* A forest green for success states, neutral and professional without being overly bright. */
-    --error-color: #a52a2a; /* A muted brown-red for error states, clear but not overly aggressive. */
-
-    /* Sombras */
+    --primary-color: #800080;
+    --primary-dark: #4b004b;
+    --primary-light: #b266b2;
+    --accent-color: #daa520;
+    --secondary-color: #6a5acd;
+    --background-light: #2e2e2e;
+    --background-dark: #f5f5f5;
+    --text-color: #333333;
+    --light-text-color: #e0e0e0;
+    --border-color: #808080;
+    --focus-border: #9932cc;
+    --success-color: #b266b2;
+    --error-color: #a52a2a;
+    --strengths-color: #729fcf;
+    --weaknesses-color: #f6c6ad;
+    --opportunities-color: #b4e5a2;
+    --threats-color: #ff0000;
     --shadow-light: rgba(0, 0, 0, 0.08);
     --shadow-medium: rgba(0, 0, 0, 0.15);
     --shadow-hover: rgba(0, 0, 0, 0.25);
@@ -25,10 +25,10 @@
 
 body {
     font-family: "Poppins", sans-serif;
-    display: flex; /* Ativa o Flexbox */
-    flex-direction: column; /* Alinha os itens verticalmente (um abaixo do outro) */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens verticalmente no meio da tela */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
     overflow-x: hidden;
     color: var(--text-color);
@@ -37,7 +37,6 @@ body {
     box-sizing: border-box;
     line-height: 1.6;
 
-    /* Novo fundo para o body - mais limpo e sutil */
     background: #f0f2f5;
 }
 
@@ -65,7 +64,7 @@ div {
     margin: 0 auto;
     box-sizing: border-box;
     overflow-x: hidden;
-    padding: 1rem; /* inner padding */
+    padding: 1rem;
 }
 
 .result-container {
@@ -86,6 +85,81 @@ div {
 
 .result-container {
     max-width: 600px;
+}
+.swot-quadrant {
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 200px;
+    overflow-y: auto;
+    font-weight: 700;
+}
+
+.swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.strengths {
+    background-color: var(--strengths-color);
+    color: var(--light-text-color);
+}
+
+.weaknesses {
+    background-color: var(--weaknesses-color);
+    color: var(--light-text-color);
+}
+
+.opportunities {
+    background-color: var(--opportunities-color);
+    color: var(--text-color);
+}
+
+.threats {
+    background-color: var(--threats-color);
+    color: var(--text-color);
+}
+
+.neutral {
+    margin-top: 20px;
+    background-color: grey;
+    display: grid;
+    color: var(--text-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    padding: 20px;
+}
+
+.neutral ul {
+    background-color: grey;
+    display: grid;
+    font-weight: 700;
+}
+
+.swot-quadrant h2 {
+    margin-top: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.swot-quadrant ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.swot-quadrant li {
+    margin-bottom: 10px;
+}
+.action-button,
+#toggle-neutral {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 h1,
@@ -140,7 +214,7 @@ label {
         box-shadow 0.3s ease,
         background-color 0.3s ease;
     box-sizing: border-box;
-    background-color: #800080; /* purple input background  */
+    background-color: #800080;
     margin-bottom: 15px;
 }
 
@@ -160,7 +234,7 @@ label {
     font-size: 1.1em;
 }
 
-.pergunta {
+.question {
     background: rgb(250, 250, 230);
     border-radius: 10px;
     padding: 25px;
@@ -175,38 +249,38 @@ label {
     border-left: 5px solid var(--primary-light);
 }
 
-.pergunta:hover {
+.question:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px var(--shadow-hover);
 }
 
-.pergunta p strong {
+.question p strong {
     font-size: 1.15em;
     color: var(--text-color);
     margin-bottom: 15px;
     display: block;
 }
 
-.pergunta sub {
+.question sub {
     font-size: 1em;
     color: var(--text-color);
     margin-bottom: 15px;
     display: block;
 }
 
-.alternativas {
+.alternatives {
     margin-top: 15px;
     gap: 20px;
 }
 
-.alternativas_sim_nao {
+.condition {
     display: flex;
     align-items: center;
     gap: 20px;
     height: 70px;
 }
 
-.alternativas label {
+.alternatives label {
     font-weight: 400;
     margin-top: 10px;
     cursor: pointer;
@@ -219,7 +293,7 @@ label {
     padding: 5px;
 }
 
-.alternativas label:hover {
+.alternatives label:hover {
     color: var(--primary-dark);
     transform: translateX(8px);
 }
@@ -303,7 +377,7 @@ button:hover {
 
 .tooltip {
     position: absolute;
-    z-index: 9999; /* or some high number */
+    z-index: 9999;
 }
 
 .hover-container .tooltip {
@@ -327,8 +401,6 @@ button:hover {
 .hover-container:hover .tooltip {
     display: block;
 }
-
-/* resultado.html */
 
 .result-container p {
     font-size: 1.15em;
@@ -392,7 +464,6 @@ button:hover {
     );
 }
 
-/* Basic Responsivity */
 @media (max-width: 768px) {
     .container,
     .result-container {
@@ -430,13 +501,13 @@ button:hover {
         margin-bottom: 15px;
     }
 
-    .pergunta {
+    .question {
         padding: 18px;
         margin-bottom: 18px;
         position: absolute;
     }
 
-    .alternativas label {
+    .alternatives label {
         font-size: 0.9em;
     }
 
@@ -445,7 +516,7 @@ button:hover {
     }
 }
 
-.alternativas .descricao {
+.alternatives .description {
     font-size: 0.85em;
     color: var(--secondary-color);
     margin-left: 5px;
@@ -485,12 +556,12 @@ button:hover {
     margin: 10px;
 }
 
-#opcoes_frequencia,
-#pergunta_cor {
+#frequency_radios,
+#color_question {
     display: none;
 }
 
-.pergunta-imagem {
+.question-image {
     max-width: 100%;
     height: auto;
     display: block;
@@ -498,7 +569,7 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.copos-opcoes {
+.glass-options {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -506,7 +577,7 @@ button:hover {
     text-align: center;
 }
 
-.copo-option {
+.glass-option {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -514,11 +585,11 @@ button:hover {
     flex: 1;
 }
 
-.copo-option input[type="radio"] {
+.glass-option input[type="radio"] {
     display: none;
 }
 
-.copo-option img {
+.glass-option img {
     max-width: 80px;
     height: auto;
     transition:
@@ -526,12 +597,12 @@ button:hover {
         box-shadow 0.2s ease;
 }
 
-.copo-option span {
+.glass-option span {
     margin-top: 8px;
     font-size: 0.95em;
 }
 
-.copo-option input[type="radio"]:checked + img {
+.glass-option input[type="radio"]:checked + img {
     transform: scale(1.1);
     box-shadow: 0 0 0 3px var(--primary-color);
     border-radius: 8px;
@@ -569,8 +640,8 @@ body {
     gap: 12px;
     background: #fafafa;
     border-radius: 20px;
-    margin-top: 2rem; /* Adiciona um espaço acima do cartão */
-    max-width: 400px; /* Define uma largura máxima */
+    margin-top: 2rem;
+    max-width: 400px;
     margin: 2rem auto;
 }
 
@@ -594,7 +665,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%; /* Garante que o formulário ocupe a largura do card */
+    width: 100%;
 }
 
 .card__form input {
@@ -610,7 +681,7 @@ body {
 .sign-up {
     padding: 12px 25px;
     margin: 20px auto 0;
-    border: none; /* Botões não precisam de borda por padrão */
+    border: none;
     border-radius: 8px;
     font-size: 1.05em;
     font-weight: 600;
@@ -630,7 +701,7 @@ body {
 
 .sign-up:hover {
     opacity: 0.85;
-    transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
+    transform: translateY(-2px);
 }
 
 html,
@@ -639,7 +710,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Estilos da Página de Resultado */
 .message-box {
     background-color: #fdfdff;
     border-left: 6px solid var(--primary-light);
@@ -651,7 +721,6 @@ body {
     width: 100%;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .container,
     .result-container {
@@ -666,21 +735,19 @@ body {
     }
 }
 
-/* Container para os botões e formulário de e-mail */
 .user-actions {
     width: 100%;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; /* Espaço entre os elementos */
+    gap: 20px;
 }
 
-/* Estilo unificado para os botões de ação */
 .action-button {
     display: block;
     width: 100%;
-    max-width: 400px; /* Largura máxima para os botões */
+    max-width: 400px;
     box-sizing: border-box;
     text-align: center;
     padding: 12px 25px;
@@ -704,7 +771,6 @@ body {
     box-shadow: 0 6px 15px var(--shadow-hover);
 }
 
-/* Variação para o botão secundário "Voltar" */
 .action-button.secondary {
     background-image: none;
     background-color: #f0f0f0;
@@ -712,7 +778,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.message-box-discursiva {
+.message-box-feedback {
     background-color: rgb(250, 240, 240);
     border-left: 6px solid var(--primary-light);
     margin-top: 30px;
@@ -727,24 +793,23 @@ body {
     line-height: 1.8;
 }
 
-/* Novo estilo para as caixas de texto discursivas */
-.discursive-textarea {
+.feedback-textarea {
     width: 100%;
     padding: 12px;
-    margin-top: 10px; /* Adiciona um espaço acima da caixa */
+    margin-top: 10px;
     border-radius: 8px;
-    border: 1px solid #dcdcdc; /* Borda mais suave */
-    font-family: "Poppins", sans-serif; /* Garante a mesma fonte do site */
+    border: 1px solid #dcdcdc;
+    font-family: "Poppins", sans-serif;
     font-size: 1em;
     line-height: 1.5;
-    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+    box-sizing: border-box;
     background-color: #fdfdfd;
-    transition: all 0.3s ease; /* Transição suave para o foco */
+    transition: all 0.3s ease;
 }
 
-.discursive-textarea:focus {
-    border-color: var(--primary-color); /* Usa a sua cor primária ao focar */
-    box-shadow: 0 0 0 3px var(--focus-shadow); /* Adiciona um brilho suave */
+.feedback-textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--focus-shadow);
     outline: none;
 }
 

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Formulário de Avaliação</title>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body id="page-formulario">
+        <div class="container">
+            <h1>Bem vindo/Bem vinda!</h1>
+            <div>
+                <p>
+                    <strong>
+                        Este questionário foi criado como parte do projeto de
+                        conclusão de curso da Priscilla e pretende ajudar
+                        adultos no espectro autista a identificar e compreender
+                        os seus traços de forma melhor. O objetivo é que seja
+                        possível reconhecer suas características únicas para as
+                        trabalhar ou as potencializar. O formulário tem 94
+                        etapas; em algumas delas (da 50 à 94, as que mencionam
+                        "hotlink") você pode passar o mouse sobre o conteúdo da
+                        etapa para ver mais detalhes e definições. Responda cada
+                        etapa imaginando-se na situação descrita.
+                    </strong>
+                </p>
+                <strong>
+                    Quando se sentir pronto(a), clique em "Próximo" para começar
+                    a sua jornada de autoconhecimento.
+                </strong>
+            </div>
+        </div>
+        <div class="user-actions">
+            <a href="{{ url_for('form')}}" class="action-button"> Prossguir </a>
+        </div>
+    </body>
+</html>

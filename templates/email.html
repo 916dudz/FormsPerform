@@ -1,36 +1,36 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Enviar Relatório por E-mail</title>
+        <title>Etapa Final: Enviar Relatório - AutSWOT</title>
         <link
             rel="stylesheet"
             href="{{ url_for('static', filename='style.css') }}"
         />
     </head>
-    <body id="page-email">
+    <body>
         <div class="container">
             <h1>Etapa Final: Enviar Relatório</h1>
+            <p>
+                As suas reflexões foram salvas com sucesso. Para receber o seu
+                relatório completo por e-mail, por favor, insira o seu endereço
+                abaixo.
+            </p>
 
             <div class="email-final-card">
-                <p class="card__content">
-                    As suas reflexões foram salvas com sucesso. Para receber o
-                    seu relatório completo por e-mail, por favor, insira o seu
-                    endereço abaixo.
-                </p>
                 <form
-                    action="{{ url_for('enviar_email', feedback_id=feedback_id) }}"
-                    method="POST"
                     class="card__form"
+                    action="{{ url_for('send_email', feedback_id=feedback_id) }}"
+                    method="POST"
                 >
                     <input
-                        name="email"
-                        placeholder="Seu E-mail"
                         type="email"
+                        name="email"
+                        placeholder="Seu endereço de e-mail"
                         required
                     />
-                    <button class="sign-up" type="submit">
+                    <button type="submit" class="sign-up">
                         Enviar Relatório por E-mail
                     </button>
                 </form>

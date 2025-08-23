@@ -4,7 +4,7 @@ colorama
 Flask
 greenlet
 itsdangerous
-Jinja2
+Jinja
 MarkupSafe
 typing_extensions
 werkzeug
