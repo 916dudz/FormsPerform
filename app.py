@@ -131,9 +131,9 @@ def _classify_with_intensity(i: int, average: float, thr: Optional[float], name:
         if thr is not None and average >= thr:
             return Trait(average, "Ameaça", name)
         elif average > 1.4:
-            return Trait(average, "Neutro", name)
-        else:
             return Trait(average, "Oportunidade", name)
+        else:
+            return Trait(average, "Neutro", name)
     else:
         if average > 3:
             return Trait(average, "Fraqueza", name)
