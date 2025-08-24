@@ -17,7 +17,7 @@ import threading
 import time
 
 # number of trait questions (1..MAX_TRAITS inclusive)
-MAX_TRAITS = 94
+MAX_TRAITS = 155
 
 BASE_PATH = (
     getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
@@ -99,7 +99,7 @@ def _parse_trait_inputs(i: int, form) -> _TraitParseResult:
         return _TraitParseResult(index=i, has_trait=False, name=name)
 
     # questions 1-49 have intensity fields
-    if 1 <= i <= 49:
+    if (1 <= i <= 49) or (i > 94):
         freq_val = form.get(f'frequency_{i}')
         intens_val = form.get(f'intensity_{i}')
         if freq_val is None or intens_val is None:
@@ -123,33 +123,35 @@ def _parse_trait_inputs(i: int, form) -> _TraitParseResult:
             return _TraitParseResult(index=i, has_trait=True, freq=None, intensity=None, name=name)
 
 def _classify_with_intensity(i: int, average: float, thr: Optional[float], name: str) -> Trait:
-    if i < 11:
+    if i < 11: # Ameaças
         if thr is not None and average >= thr:
             return Trait(average, "Ameaça", name)
         elif average > 1.4:
             return Trait(average, "Fraqueza", name)
         else:
             return Trait(average, "Neutro", name)
-    elif i < 26:
+    elif (i < 26) or (i > 94): # Fraquezas
         if thr is not None and average >= thr:
             return Trait(average, "Ameaça", name)
         elif average > 1.4:
             return Trait(average, "Oportunidade", name)
         else:
             return Trait(average, "Neutro", name)
+    elif i < 95:
+        if average > 3: # Oportunidades
+            return Trait(average, "Fraqueza", name)
+        else:
+            return Trait(average, "Oportunidade", name)
     else:
-        if average > 3:
-            return Trait(average, "Fraqueza", name)
-        else:
-            return Trait(average, "Oportunidade", name)
+        return Trait(average, "Neutro", name)
 
 def _classify_without_intensity(freq: int, name: str) -> Trait:
     if freq in (1, 2):
-        return Trait(freq, "Neutro", name)
+        return Trait(freq, "Oportunidade", name)
     elif freq in (3, 4):
         return Trait(freq, "Força", name)
     else:
-        return Trait(freq, "Oportunidade", name)
+        return Trait(freq, "Ameaça", name)
 
 
 
@@ -236,7 +238,7 @@ def formula() -> Tuple[int, List[Trait]]:
             traits[i] = Trait(0.0, "Não possui o traço", parsed.name)
             continue
 
-        if parsed.freq is None or (1 <= i <= 49 and parsed.intensity is None):
+        if parsed.freq is None or ((1 <= i <= 49) or i > 94) and parsed.intensity is None:
             logger.error("Campos de formulário ausentes/invalidos para a pergunta %d", i)
             traits[i] = Trait(-1, "Erro", parsed.name)
             continue
