@@ -148,10 +148,8 @@ def _classify_with_intensity(i: int, average: float, thr: Optional[float], name:
 def _classify_without_intensity(freq: int, name: str) -> Trait:
     if freq in (1, 2):
         return Trait(freq, "Oportunidade", name)
-    elif freq in (3, 4):
-        return Trait(freq, "Força", name)
     else:
-        return Trait(freq, "Ameaça", name)
+        return Trait(freq, "Força", name)
 
 
 
