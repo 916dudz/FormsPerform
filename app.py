@@ -12,6 +12,9 @@ from flask_mail import Mail, Message
 from flask import abort
 from dataclasses import dataclass
 import logging
+import webbrowser
+import threading
+import time
 
 # number of trait questions (1..MAX_TRAITS inclusive)
 MAX_TRAITS = 94
@@ -303,7 +306,27 @@ def result():
 
 @app.route('/feedback/<int:feedback_id>')
 def feedback(feedback_id):
-    return render_template('feedback.html', feedback_id=feedback_id)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    sql = 'SELECT swot_data FROM answer WHERE id = %s'
+    placeholder = (feedback_id,)
+    if isinstance(conn, sqlite3.Connection):
+        sql = sql.replace('%s', '?')
+    cursor.execute(sql, placeholder)
+    record = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
+    if record is None:
+        abort(404, f"Feedback {feedback_id} not found")
+
+    swot_data = json.loads(record['swot_data'])
+    traits = [
+        Trait(score=item['score'], type=item['category'], name=item['name'])
+        for item in swot_data
+    ]
+
+    return render_template('feedback.html', feedback_id=feedback_id, traits=traits)
 
 
 @app.route('/save_feedback/<int:feedback_id>', methods=['POST'])
@@ -381,4 +404,9 @@ def confirmation():
 
 if __name__ == "__main__":
     init_db()
-    app.run(debug=False, use_reloader=False)
+    # Assuming password dialog here, e.g., app.config['MAIL_PASSWORD'] = simpledialog.askstring(...)
+    def open_browser():
+        time.sleep(1)  # Delay to ensure server is running.
+        webbrowser.open("http://127.0.0.1:5000/")
+    threading.Thread(target=open_browser).start()
+    app.run(debug=True, use_reloader=False)

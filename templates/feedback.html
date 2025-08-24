@@ -10,34 +10,70 @@
         />
     </head>
     <body id="page-feedback">
-        <div class="container" style="max-width: 800px">
-            <h1>Plano de Desenvolvimento Pessoal</h1>
+        <h1>Plano de Desenvolvimento Pessoal</h1>
+        <div class="swot-grid">
+            <div id="strengths" class="swot-quadrant strengths">
+                <h2 style="color: black">Forças</h2>
+                <ul>
+                    {% for trait in traits %} {% if trait.type == 'Força' %}
+                    <li>{{ trait.name }}</li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
 
+            <div id="weaknesses" class="swot-quadrant weaknesses">
+                <h2 style="color: black">Fraquezas</h2>
+                <ul>
+                    {% for trait in traits %} {% if trait.type == 'Fraqueza' %}
+                    <li>{{ trait.name }}</li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
+
+            <div id="opportunities" class="swot-quadrant opportunities">
+                <h2 style="color: black">Oportunidades</h2>
+                <ul>
+                    {% for trait in traits %} {% if trait.type == 'Oportunidade'
+                    %}
+                    <li>{{ trait.name }}</li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
+
+            <div id="threats" class="swot-quadrant threats">
+                <h2 style="color: black">Ameaças</h2>
+                <ul>
+                    {% for trait in traits %} {% if trait.type == 'Ameaça' %}
+                    <li>{{ trait.name }}</li>
+                    {% endif %} {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="container" style="max-width: 800px">
             <form
                 action="{{ url_for('save_feedback', feedback_id=feedback_id) }}"
                 method="POST"
             >
                 <div class="message-box-feedback">
-                    <h2>BLOCO 1 – Lidando com ameaças e fraquezas</h2>
+                    <h2>
+                        Reflita sobre cada traço considerado uma ameaça e
+                        fraqueza e responda cada um deles:
+                    </h2>
                 </div>
-
+                <br />
                 <div class="question">
                     <p>
                         <strong>
-                            1. O que você pode fazer para reduzir o impacto
-                            negativo dos traços que são ameaças e fraquezas nos
-                            diferentes contextos da sua vida?
+                            Quando foi a última vez que esse traço se manifestou
+                            em sua vida? Em que âmibito (trabalho, educacional,
+                            social com amigos/família, parceiro romântico) da
+                            vida aconteceu? Explique o que ocorreu.
                         </strong>
                         <br />
-                        <small>
-                            (Ambientes: trabalho, estudo, vida social, família,
-                            amizades e relacionamento romântico)
-                        </small>
                     </p>
                     <textarea
-                        name="O que você pode fazer para reduzir o impacto
-                        negativo dos traços que são ameaças e fraquezas nos
-                        diferentes contextos da sua vida?"
+                        name=" Quando foi a última vez que esse traço se manifestou em sua vida? Em que âmibito (trabalho, educacional, social com amigos/família, parceiro romântico) da vida aconteceu? Explique o que ocorreu."
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="feedback-textarea"
@@ -49,20 +85,13 @@
                 <div class="question">
                     <p>
                         <strong>
-                            2. O que as pessoas de cada um desses contextos
-                            podem fazer para te ajudar a reduzir o impacto
-                            negativo desses traços?
+                            Quais foram as consequências negativas desse traço
+                            na situação citada na questão anterior?
                         </strong>
                         <br />
-                        <small>
-                            (O que colegas de trabalho, professores, familiares,
-                            amigos e parceiro(a) romântico(a) poderiam fazer?)
-                        </small>
                     </p>
                     <textarea
-                        name="O que as pessoas de cada um desses contextos
-                        podem fazer para te ajudar a reduzir o impacto
-                        negativo desses traços?"
+                        name="Quais foram as consequências negativas desse traço na situação citada na questão anterior?"
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="feedback-textarea"
@@ -74,17 +103,13 @@
                 <div class="question">
                     <p>
                         <strong>
-                            3. Você pode utilizar os traços que são forças para
-                            reduzir o impacto negativo das ameaças e fraquezas? </strong
+                            Como você se sentiu com relação ao impacto do traço
+                            negativo desse traço na situação citada? </strong
                         ><br />
-                        <small>
-                            Se sim, quais forças poderiam ser usadas e como elas
-                            poderiam ajudar?
-                        </small>
                     </p>
                     <textarea
-                        name="Você pode utilizar os traços que são forças para
-                        reduzir o impacto negativo das ameaças e fraquezas?"
+                        name="Como você se sentiu com relação ao impacto do traço
+                        negativo desse traço na situação citada?"
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="feedback-textarea"
@@ -96,46 +121,15 @@
                 <div class="question">
                     <p>
                         <strong>
-                            4. Somando tudo o que você pode fazer e o que as
-                            outras pessoas podem fazer, isso seria suficiente
-                            para lidar com os impactos negativos?
+                            Em cada âmbito da vida (trabalho, educacional,
+                            social com amigos/família, parceiro romântico), o
+                            que você pode fazer para reduzir o impacto negativo
+                            desse traço?
                         </strong>
                         <br />
-                        <small> Se não, o que mais seria necessário? </small>
                     </p>
                     <textarea
-                        name="Somando tudo o que você pode fazer e o que as
-                        outras pessoas podem fazer, isso seria suficiente
-                        para lidar com os impactos negativos?"
-                        rows="5"
-                        placeholder="Digite sua resposta aqui..."
-                        class="feedback-textarea"
-                        required
-                    >
-                    </textarea>
-                </div>
-
-                <div class="message-box-feedback">
-                    <h2>BLOCO 2 – Transformando oportunidades em forças</h2>
-                </div>
-
-                <div class="question">
-                    <p>
-                        <strong>
-                            5. O que você pode fazer para transformar os traços
-                            que hoje são considerados oportunidades em forças
-                            reais?
-                        </strong>
-                        <br />
-                        <small>
-                            (Quais oportunidades podem ser transformadas e como
-                            fazer isso?)
-                        </small>
-                    </p>
-                    <textarea
-                        name="O que você pode fazer para transformar os traços
-                        que hoje são considerados oportunidades em forças
-                        reais?"
+                        name="Em cada âmbito da vida (trabalho, educacional, social com amigos/família, parceiro romântico), o que você pode fazer para reduzir o impacto negativo desse traço?"
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="feedback-textarea"
@@ -147,18 +141,15 @@
                 <div class="question">
                     <p>
                         <strong>
-                            6. O que outras pessoas (em diferentes contextos)
-                            podem fazer para te ajudar nesse processo?
+                            O que outras pessoas em cada um dos cenários
+                            mencionados acima (trabalho, educacional, etc...)
+                            podem fazer?
                         </strong>
                         <br />
-                        <small
-                            >(Quais apoios seriam úteis e como eles poderiam te
-                            ajudar?)
-                        </small>
                     </p>
                     <textarea
-                        name="O que outras pessoas (em diferentes contextos)
-                        podem fazer para te ajudar nesse processo?"
+                        name="O que outras pessoas em cada um dos cenários
+                        mencionados acima (trabalho, educacional, etc...) podem fazer?"
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="feedback-textarea"
@@ -170,20 +161,31 @@
                 <div class="question">
                     <p>
                         <strong>
-                            7. As forças que você já possui podem ser usadas
-                            para ajudar na transformação dessas oportunidades em
-                            forças?
+                            Alguma força autística pode ajuda-lo a reduzir o
+                            impacto negativo desse traço?
                         </strong>
                         <br />
-                        <small
-                            >Se sim, quais forças podem ser usadas e como isso
-                            poderia acontecer?
-                        </small>
                     </p>
                     <textarea
-                        name="As forças que você já possui podem ser usadas
-                        para ajudar na transformação dessas oportunidades em
-                        forças?"
+                        name="Alguma força autística pode ajuda-lo a reduzir o impacto negativo desse traço?"
+                        rows="5"
+                        placeholder="Digite sua resposta aqui..."
+                        class="feedback-textarea"
+                        required
+                    >
+                    </textarea>
+                </div>
+
+                <div class="question">
+                    <p>
+                        <strong>
+                            O que você e outras pessoas podem fazer é o
+                            suficiente? Se não for, o que mais é necessário?
+                        </strong>
+                        <br />
+                    </p>
+                    <textarea
+                        name="O que você e outras pessoas podem fazer é o suficiente? Se não for, o que mais é necessário?"
                         rows="5"
                         placeholder="Digite sua resposta aqui..."
                         class="feedback-textarea"

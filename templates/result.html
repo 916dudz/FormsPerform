@@ -17,7 +17,7 @@
 
         <div class="swot-grid">
             <div id="strengths" class="swot-quadrant strengths">
-                <h2 style="color: white">Forças</h2>
+                <h2 style="color: black">Forças</h2>
                 <ul>
                     {% for trait in traits %} {% if trait.type == 'Força' %}
                     <li>{{ trait.name }}</li>
@@ -26,7 +26,7 @@
             </div>
 
             <div id="weaknesses" class="swot-quadrant weaknesses">
-                <h2 style="color: white">Fraquezas</h2>
+                <h2 style="color: black">Fraquezas</h2>
                 <ul>
                     {% for trait in traits %} {% if trait.type == 'Fraqueza' %}
                     <li>{{ trait.name }}</li>
@@ -78,7 +78,7 @@
 
             <div class="user-actions">
                 <a
-                    href="{{ url_for('feedback', feedback_id=feedback_id) }}"
+                    href="{{ url_for('feedback', feedback_id=feedback_id, traits=traits) }}"
                     class="action-button"
                 >
                     Responder Perguntas de Reflexão

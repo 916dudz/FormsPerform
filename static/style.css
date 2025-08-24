@@ -13,7 +13,7 @@
     --success-color: #b266b2;
     --error-color: #a52a2a;
     --strengths-color: #729fcf;
-    --weaknesses-color: #f6c6ad;
+    --weaknesses-color: orange;
     --opportunities-color: #b4e5a2;
     --threats-color: #ff0000;
     --shadow-light: rgba(0, 0, 0, 0.08);
@@ -103,12 +103,12 @@ div {
 
 .strengths {
     background-color: var(--strengths-color);
-    color: var(--light-text-color);
+    color: var(--text-color);
 }
 
 .weaknesses {
     background-color: var(--weaknesses-color);
-    color: var(--light-text-color);
+    color: var(--text-color);
 }
 
 .opportunities {
